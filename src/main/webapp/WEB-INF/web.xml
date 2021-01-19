@@ -10,7 +10,6 @@
   <servlet-name>OnlingShopController</servlet-name>
   <servlet-class>com.epam.onlineShop.controller.OnlineShopController</servlet-class>
   <load-on-startup>0</load-on-startup>
-
 </servlet>
 <servlet-mapping>
   <servlet-name>OnlingShopController</servlet-name>

@@ -1,11 +1,19 @@
 package com.epam.onlineShop.controller;
 
+import com.epam.onlineShop.database.connection.MyDAOException;
+import com.epam.onlineShop.service.RegistrationUserService;
+import com.epam.onlineShop.service.Service;
+import com.epam.onlineShop.service.ServiceFactory;
+
+import javax.servlet.Registration;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.text.ParseException;
 
 
 public class OnlineShopController extends HttpServlet {
@@ -15,20 +23,17 @@ public class OnlineShopController extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //String requestString = request.getRequestURI();
-//        ServiceFactory serviceFactory = ServiceFactory.getInstance();
-//        Service service = serviceFactory.getService(requestString);
-//        try {
-//            service.execute(request, response);
-//        } catch (ParseException | SQLException e) {
-//            LOGGER.error(e);
-//        }
+        String path = request.getServletPath();
+        ServiceFactory serviceFactory = ServiceFactory.getInstance();
+        Service service = serviceFactory.getService(path);
+        try {
+            service.execute(request, response);
+        } catch (ParseException | SQLException e) {
+            System.out.println(e);
+        }
 
-        HttpSession session = request.getSession();
-        session.setAttribute("name", "Tom");
-        session.setAttribute("age", 34);
 
-        getServletContext().getRequestDispatcher("/a.jsp").forward(request, response);
+
 
         //response.sendRedirect("a.jsp");
     }
