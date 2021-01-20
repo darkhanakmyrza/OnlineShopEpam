@@ -17,7 +17,7 @@ import java.sql.SQLException;
 public class UserDaoImpl extends ConnectionPool implements UserDao{
     private static final String INSERT_INTO_USERS = "INSERT USER(first_name, last_name, email, password, admin) VALUES" +
             "(?, ?, ?, ?, ?)";
-    private static final String GET_USER_BY_LOGIN_PASSWORD = "SELECT first_name, last_name, email, password, admin FROM" +
+    private static final String GET_USER_BY_LOGIN_PASSWORD = "SELECT id, first_name, last_name, email, password, admin FROM" +
             " USER WHERE email = ? AND password = ?";
 
 
@@ -66,13 +66,14 @@ public class UserDaoImpl extends ConnectionPool implements UserDao{
 
             while (resultSet.next()) {
                 user = new User();
+                user.setId(resultSet.getLong("id"));
                 user.setFirstName(resultSet.getString("first_name"));
                 user.setLastName(resultSet.getString("last_name"));
                 user.setEmail(resultSet.getString("email"));
                 user.setPassword(resultSet.getString("password"));
                 user.setAdmin(resultSet.getBoolean("admin"));
             }
-            System.out.println(user.getPassword());
+
             resultSet.close();
             preparedStatement.close();
             releaseConnection(con);

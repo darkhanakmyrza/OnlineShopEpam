@@ -13,6 +13,14 @@ public class ServiceFactory {
         SERVICE_MAP.put("/login", new LoginUserService());
         SERVICE_MAP.put("/home", new GetAllProductsService());
         SERVICE_MAP.put("/product", new GetOneProductService());
+        SERVICE_MAP.put("/addProductToCart", new AddProductToCartService());
+        SERVICE_MAP.put("/cart", new GetAllProductFromCartService());
+        SERVICE_MAP.put("/deleteProductFromCart", new DeleteProductFromCartService());
+        SERVICE_MAP.put("/admin", new LoginAdminService() );
+        SERVICE_MAP.put("/search", new SearchProductsService() );
+        SERVICE_MAP.put("/createProduct", new CreateNewProductService());
+        SERVICE_MAP.put("/updateProduct", new UpdateProductService());
+        SERVICE_MAP.put("/deleteProduct", new DeleteProductService());
 
 
     }

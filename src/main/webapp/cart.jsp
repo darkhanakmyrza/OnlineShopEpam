@@ -1,24 +1,14 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Admin
-  Date: 18.01.2021
-  Time: 11:30
-  To change this template use File | Settings | File Templates.
---%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Home page</title>
+    <title>cart</title>
 </head>
 <body>
-    <c:if test="${sessionScope.user.isAdmin() == true}">
-        <a href="createProduct">create a product </a>
-    </c:if>
-    <a href="cart">Go to my cart  </a>
-    <p>Hello <c:out value="${sessionScope.user.getFirstName()}" /> </p>
-    <div>
-    <c:forEach var = "product" items="${products}">
+<body>
+<h1>cart </h1>
+<div>
+    <c:forEach var = "product" items="${productIdsInCart}">
     <div class="row clearfix">
         <div class="col-lg-3 col-sm-6 col-md-3">
             <a href="product?id=${product.getId() }">
@@ -28,7 +18,12 @@
                 </div>
             </a>
         </div>
+        <form action="deleteProductFromCart" method="post">
+            <input type="hidden" name="productId" value="<c:out value="${product.getId()}"/>" />
+            <button class="">Delete From Cart</button>
+        </form>
         </c:forEach>
     </div>
+</body>
 </body>
 </html>
