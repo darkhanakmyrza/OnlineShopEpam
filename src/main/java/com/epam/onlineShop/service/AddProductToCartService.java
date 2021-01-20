@@ -4,6 +4,7 @@ import com.epam.onlineShop.database.dao.impl.CartDaoImpl;
 import com.epam.onlineShop.database.dao.interfaces.CartDao;
 import com.epam.onlineShop.entity.Cart;
 import com.epam.onlineShop.entity.User;
+import com.epam.onlineShop.service.factory.CartFactory;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,7 +18,7 @@ import java.util.List;
 
 public class AddProductToCartService implements Service {
     CartDao cartDao = new CartDaoImpl();
-
+    CartFactory cartFactory = new CartFactory();
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ParseException, SQLException {
 
@@ -25,33 +26,20 @@ public class AddProductToCartService implements Service {
 
         long productId = Long.valueOf(request.getParameter("productId"));
         long userId = ((User)session.getAttribute("user")).getId();
-
-
-
         List<Long> productInCart =cartDao.getProductsInCart(userId);
-        int a = 1;
+        boolean alreadyInCart = false;
         for(Long product : productInCart){
             if(product.equals(productId)){
-                a = 0;
+                alreadyInCart= true;
                 break;
-
             }
         }
-
-        if(a==1){
-            Cart cart = new Cart();
-            cart.setUserId(userId);
-            cart.setProductId(productId);
+        if(!alreadyInCart){
+            Cart cart = cartFactory.fillCart(request);
             cartDao.addProductToCart(cart);
             response.sendRedirect("cart");
         }else{
             response.sendRedirect("home");
         }
-
-
-
-
-
-
     }
 }

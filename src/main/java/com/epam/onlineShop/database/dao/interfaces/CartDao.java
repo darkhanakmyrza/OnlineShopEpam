@@ -11,6 +11,5 @@ public interface CartDao {
     List<Long> getProductsInCart(long userId) throws SQLException, IOException;
     void DeleteProductInCart(long productId, long userId) throws SQLException, IOException;
     Cart getCart(Cart cart) throws SQLException, IOException;
-    void deleteAllProductsInAllCarts(long productId) throws SQLException, IOException;
     List<Cart> getAllFromCart(long productId) throws SQLException, IOException;
 }

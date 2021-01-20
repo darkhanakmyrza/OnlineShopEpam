@@ -33,13 +33,13 @@ public class LoginUserService implements Service {
             User user = userDao.getUserByLoginPassword(login, password);
 
             if (user != null) {
-
-                session.setAttribute("user", user);
-                session.setAttribute("admin", user.isAdmin());
-
-
-                serviceFactory.getService("/home").execute(request, response);
-
+                if(user.isActive()) {
+                    session.setAttribute("user", user);
+                    session.setAttribute("admin", user.isAdmin());
+                    serviceFactory.getService("/home").execute(request, response);
+                }else{
+                    response.sendRedirect("login");
+                }
             } else {
                 dispatcher = request.getRequestDispatcher("login.jsp");
                 dispatcher.forward(request, response);

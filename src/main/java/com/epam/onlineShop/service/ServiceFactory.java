@@ -21,6 +21,10 @@ public class ServiceFactory {
         SERVICE_MAP.put("/createProduct", new CreateNewProductService());
         SERVICE_MAP.put("/updateProduct", new UpdateProductService());
         SERVICE_MAP.put("/deleteProduct", new DeleteProductService());
+        SERVICE_MAP.put("/allUsers", new GetAllUsersService());
+        SERVICE_MAP.put("/activateUser", new ActivateUserService());
+        SERVICE_MAP.put("/deactivateUser", new DeactivateUserService());
+
 
 
     }

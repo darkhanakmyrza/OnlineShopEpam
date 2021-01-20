@@ -100,28 +100,7 @@ public class CartDaoImpl extends ConnectionPool implements CartDao {
         }
 
     }
-//    public void DeleteProductInCartByProductId(long productId) throws SQLException, IOException{
-//        Connection con = null;
-//        try{
-//            con = getConnection();
-//            PreparedStatement preparedStatement = con.prepareStatement(DELETE_PRODUCT_FROM_CART);
-//            preparedStatement.setLong(1,productId);
-//
-//
-//            int rows = preparedStatement.executeUpdate();
-//            preparedStatement.close();
-//            releaseConnection(con);
-//
-//        }catch (Exception e) {
-//            try {
-//                if (con != null)
-//                    con.close();
-//            } catch (SQLException e2) {
-//            }
-//            System.out.println(e);
-//        }
-//
-//    }
+
     public Cart getCart(Cart cart) throws SQLException,IOException {
         Connection con = null;
         Cart newCart = null;
@@ -147,9 +126,8 @@ public class CartDaoImpl extends ConnectionPool implements CartDao {
             }
         return newCart;
     }
-    public void deleteAllProductsInAllCarts(long productId) throws SQLException, IOException{
 
-    }public List<Cart> getAllFromCart(long productId) throws SQLException, IOException{
+    public List<Cart> getAllFromCart(long productId) throws SQLException, IOException{
         List<Cart> carts =new ArrayList<>();
         Connection con = null;
         try {
@@ -162,7 +140,6 @@ public class CartDaoImpl extends ConnectionPool implements CartDao {
                 cart.setId(rs.getLong("id"));
                 cart.setProductId(rs.getLong("product_id"));
                 cart.setUserId(rs.getLong("user_id"));
-
 
                 carts.add(cart);
             }

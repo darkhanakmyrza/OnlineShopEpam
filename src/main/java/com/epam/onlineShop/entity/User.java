@@ -8,6 +8,7 @@ public class User {
     private String email;
     private String password;
     private boolean admin;
+    private boolean active;
 
     public long getId() {
         return id;
@@ -55,5 +56,13 @@ public class User {
 
     public void setAdmin(boolean admin) {
         this.admin = admin;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

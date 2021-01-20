@@ -30,8 +30,6 @@ public class GetAllProductFromCartService implements Service{
 
         List<Long> productIdsInCart = cartDao.getProductsInCart(userId);
 
-
-        //add in cart factory
         long sumOfPrice = 0 ;
         List<Product> products_in_cart = new ArrayList<>();
         for(long productId : productIdsInCart){
