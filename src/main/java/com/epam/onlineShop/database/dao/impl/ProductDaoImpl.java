@@ -3,6 +3,8 @@ package com.epam.onlineShop.database.dao.impl;
 import com.epam.onlineShop.database.connection.ConnectionPool;
 import com.epam.onlineShop.database.dao.interfaces.ProductDao;
 import com.epam.onlineShop.entity.Product;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -13,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDaoImpl extends ConnectionPool implements ProductDao {
-
+    private final Logger LOGGER = LogManager.getLogger(this.getClass().getName());
     private static final String GET_ALL_PRODUCTS = "SELECT * FROM product";
     private static final String GET_PRODUCT = "SELECT * FROM product WHERE id = ?";
     private static final String INSERT_PRODUCT = "INSERT product(name, description, price, image_url, user_id) VALUES(?,?,?,?,?)";
@@ -48,7 +50,7 @@ public class ProductDaoImpl extends ConnectionPool implements ProductDao {
                     con.close();
             } catch (SQLException e2) {
             }
-            System.out.println(e);
+            LOGGER.error(e);
         }
         return product;
     }
@@ -81,7 +83,7 @@ public class ProductDaoImpl extends ConnectionPool implements ProductDao {
                     con.close();
             } catch (SQLException e2) {
             }
-            System.out.println(e);
+            LOGGER.error(e);
         }
         return products;
     }
@@ -109,7 +111,7 @@ public class ProductDaoImpl extends ConnectionPool implements ProductDao {
                     con.close();
             } catch (SQLException e2) {
             }
-            System.out.println(e);
+            LOGGER.error(e);
         }
     }
 
@@ -136,7 +138,7 @@ public class ProductDaoImpl extends ConnectionPool implements ProductDao {
                     con.close();
             } catch (SQLException e2) {
             }
-            System.out.println(e);
+            LOGGER.error(e);
         }
     }
 
@@ -171,7 +173,7 @@ public class ProductDaoImpl extends ConnectionPool implements ProductDao {
                     con.close();
             } catch (SQLException e2) {
             }
-            System.out.println(e);
+            LOGGER.error(e);
         }
         return products;
 
@@ -193,7 +195,7 @@ public class ProductDaoImpl extends ConnectionPool implements ProductDao {
                     con.close();
             } catch (SQLException e2) {
             }
-            System.out.println(e);
+            LOGGER.error(e);
         }
     }
 }

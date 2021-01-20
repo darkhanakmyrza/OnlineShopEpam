@@ -4,6 +4,8 @@ import com.epam.onlineShop.database.connection.ConnectionPool;
 import com.epam.onlineShop.database.connection.MyDAOException;
 import com.epam.onlineShop.database.dao.interfaces.UserDao;
 import com.epam.onlineShop.entity.User;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -15,6 +17,8 @@ import java.util.List;
 
 
 public class UserDaoImpl extends ConnectionPool implements UserDao{
+    private final Logger LOGGER = LogManager.getLogger(this.getClass().getName());
+
     private static final String INSERT_INTO_USERS = "INSERT USER(first_name, last_name, email, password, admin, active) VALUES" +
             "(?, ?, ?, ?, ?, ?)";
     private static final String GET_USER_BY_LOGIN_PASSWORD = "SELECT id, first_name, last_name, email, password, admin, active FROM" +
@@ -51,7 +55,7 @@ public class UserDaoImpl extends ConnectionPool implements UserDao{
                     con.close();
             } catch (SQLException e2) { /* ignore */
             }
-            System.out.println(e);
+            LOGGER.error(e);
         }
     }
 
@@ -87,7 +91,7 @@ public class UserDaoImpl extends ConnectionPool implements UserDao{
                     con.close();
             } catch (SQLException e2) {
             }
-            System.out.println(e);
+            LOGGER.error(e);
         }
         return user;
     }
@@ -123,7 +127,7 @@ public class UserDaoImpl extends ConnectionPool implements UserDao{
                     con.close();
             } catch (SQLException e2) {
             }
-            System.out.println(e);
+            LOGGER.error(e);
         }
         return users;
 
@@ -148,7 +152,7 @@ public class UserDaoImpl extends ConnectionPool implements UserDao{
                     con.close();
             } catch (SQLException e2) {
             }
-            System.out.println(e);
+            LOGGER.error(e);
         }
     }
 

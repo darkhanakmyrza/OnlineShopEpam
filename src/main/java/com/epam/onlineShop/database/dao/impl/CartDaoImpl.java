@@ -6,7 +6,9 @@ import com.epam.onlineShop.database.dao.interfaces.CartDao;
 import com.epam.onlineShop.entity.Cart;
 import com.epam.onlineShop.entity.Product;
 import com.epam.onlineShop.entity.User;
-
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+import org.apache.log4j.Logger;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,6 +19,8 @@ import java.util.List;
 import java.util.Objects;
 
 public class CartDaoImpl extends ConnectionPool implements CartDao {
+    private final Logger LOGGER = LogManager.getLogger(this.getClass().getName());
+
     private static final String INSERT_PRODUCT_INTO_CART = "INSERT cart(product_id, user_id) VALUES(?, ?)";
     private static final String GET_PRODUCTS_FROM_CART_BY_USER_ID = "SELECT * FROM cart WHERE user_id = ?";
     private static final String DELETE_PRODUCT_FROM_CART = "DELETE FROM cart WHERE product_id = ? AND user_id = ?";
@@ -42,9 +46,9 @@ public class CartDaoImpl extends ConnectionPool implements CartDao {
             try {
                 if (con != null)
                     con.close();
-            } catch (SQLException e2) { /* ignore */
+            } catch (SQLException e2) {
             }
-            System.out.println(e);
+            LOGGER.error(e);
         }
     }
 
@@ -73,7 +77,7 @@ public class CartDaoImpl extends ConnectionPool implements CartDao {
                     con.close();
             } catch (SQLException e2) {
             }
-            System.out.println(e);
+            LOGGER.error(e);
         }
         return productsIds;
     }
@@ -96,7 +100,7 @@ public class CartDaoImpl extends ConnectionPool implements CartDao {
                     con.close();
             } catch (SQLException e2) {
             }
-            System.out.println(e);
+            LOGGER.error(e);
         }
 
     }
@@ -122,7 +126,7 @@ public class CartDaoImpl extends ConnectionPool implements CartDao {
                         con.close();
                 } catch (SQLException e2) {
                 }
-                System.out.println(e);
+            LOGGER.error(e);
             }
         return newCart;
     }
@@ -152,7 +156,7 @@ public class CartDaoImpl extends ConnectionPool implements CartDao {
                     con.close();
             } catch (SQLException e2) {
             }
-            System.out.println(e);
+            LOGGER.error(e);
         }
         return carts;
     }

@@ -14,9 +14,11 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
+import org.apache.log4j.Logger;
 
 
 public class OnlineShopController extends HttpServlet {
+    private final Logger LOG = Logger.getLogger(this.getClass().getName());
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
@@ -29,12 +31,8 @@ public class OnlineShopController extends HttpServlet {
         try {
             service.execute(request, response);
         } catch (ParseException | SQLException e) {
-            System.out.println(e);
+            LOG.error(e);
         }
 
-
-
-
-        //response.sendRedirect("a.jsp");
     }
 }
