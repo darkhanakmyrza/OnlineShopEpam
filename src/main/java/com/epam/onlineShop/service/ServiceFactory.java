@@ -24,7 +24,7 @@ public class ServiceFactory {
         SERVICE_MAP.put("/allUsers", new GetAllUsersService());
         SERVICE_MAP.put("/activateUser", new ActivateUserService());
         SERVICE_MAP.put("/deactivateUser", new DeactivateUserService());
-
+        SERVICE_MAP.put("/logout", new LogOutUserService());
 
 
     }

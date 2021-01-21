@@ -32,6 +32,11 @@ CREATE TABLE cart(
     FOREIGN KEY (user_id) REFERENCES user(id)
 );
 
+insert user values(1,'admin','admin', 'ad@gmail.com', 'admin',1,1);
+insert user values(2,'testUser','testUser', 'test@gmail.com', 'test',0,1);
+insert user values(3,'testUser2','testUser2', 'test2@gmail.com', 'test2',0,1);
+
+
 insert product values(1, 'Apple MacBook Pro 13',
 '- операционная система: Mac OS
 - диагональ экрана: 13.3 дюйм

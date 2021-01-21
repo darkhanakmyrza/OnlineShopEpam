@@ -81,7 +81,7 @@
     <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6">
-            <form class="form-signin" method="post">
+            <form class="form-signin" method="post" action="registration">
                 <h2 class="form-signin-heading">Join us now!</h2>
 
                 <input type="email" class="form-control setMargin" placeholder="Email address" name="email" required

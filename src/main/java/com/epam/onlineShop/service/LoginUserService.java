@@ -4,7 +4,8 @@ import com.epam.onlineShop.database.connection.MyDAOException;
 import com.epam.onlineShop.database.dao.impl.UserDaoImpl;
 import com.epam.onlineShop.database.dao.interfaces.UserDao;
 import com.epam.onlineShop.entity.User;
-
+import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.codec.digest.DigestUtils;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -30,8 +31,8 @@ public class LoginUserService implements Service {
         String password = request.getParameter("password");
 
         if (login != null && password != null) {
-
-            User user = userDao.getUserByLoginPassword(login, password);
+            String securedPassword = DigestUtils.md5Hex(password);
+            User user = userDao.getUserByLoginPassword(login, securedPassword);
 
             if (user != null) {
                 if(user.isActive()) {
