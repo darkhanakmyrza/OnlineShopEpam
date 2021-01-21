@@ -12,8 +12,8 @@ public class UserFactory {
 
     public User fillUser(HttpServletRequest request) {
         User newUser = new User();
-        newUser.setFirstName(request.getParameter(FIRST_NAME));
-        newUser.setLastName(request.getParameter("last_name"));
+        newUser.setFirstName(request.getParameter("firstName"));
+        newUser.setLastName(request.getParameter("lastName"));
         newUser.setEmail(request.getParameter("email"));
         String password = request.getParameter("password");
         String securedPassword = DigestUtils.md5Hex(password);

@@ -26,8 +26,9 @@ public class LoginUserService implements Service {
         HttpSession session = request.getSession();
 
 
-        String login = request.getParameter("login");
+        String login = request.getParameter("email");
         String password = request.getParameter("password");
+
         if (login != null && password != null) {
 
             User user = userDao.getUserByLoginPassword(login, password);
