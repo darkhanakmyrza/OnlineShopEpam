@@ -10,6 +10,7 @@ public class ServiceFactory {
 
     static {
         SERVICE_MAP.put("/registration", new RegistrationUserService()) ;
+        SERVICE_MAP.put("/registrationAdmin", new RegistrationAdminService()) ;
         SERVICE_MAP.put("/login", new LoginUserService());
         SERVICE_MAP.put("/home", new GetAllProductsService());
         SERVICE_MAP.put("/product", new GetOneProductService());

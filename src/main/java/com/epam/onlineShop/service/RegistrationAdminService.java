@@ -1,8 +1,10 @@
 package com.epam.onlineShop.service;
+
 import com.epam.onlineShop.database.dao.impl.UserDaoImpl;
 import com.epam.onlineShop.database.dao.interfaces.UserDao;
 import com.epam.onlineShop.entity.User;
 import com.epam.onlineShop.service.factory.UserFactory;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +17,7 @@ import java.text.ParseException;
 import static com.epam.onlineShop.util.constants.ConstantNames.ADMIN;
 import static com.epam.onlineShop.util.constants.ConstantNames.USER;
 
-public class RegistrationUserService implements Service{
+public class RegistrationAdminService implements Service {
     private UserFactory userFactory = UserFactory.getInstance();
     private UserDao userDao = new UserDaoImpl();
     private ServiceFactory serviceFactory = ServiceFactory.getInstance();
@@ -26,17 +28,21 @@ public class RegistrationUserService implements Service{
         RequestDispatcher dispatcher;
         String email = request.getParameter("email");
 
+
+
         if(email != null) {
-            User newUser = userFactory.fillUser(request,false);
+            User newUser = userFactory.fillUser(request,true);
             userDao.addUser(newUser);
+
             newUser.setId(userDao.getUserByLoginPassword(newUser.getEmail(), newUser.getPassword()).getId());
+
             session.setAttribute(USER, newUser);
             session.setAttribute(ADMIN, newUser.isAdmin());
+
             response.sendRedirect("home");
         }else{
-            dispatcher = request.getRequestDispatcher("registration.jsp");
+            dispatcher = request.getRequestDispatcher("registrationAdmin.jsp");
             dispatcher.forward(request, response);
         }
-
     }
 }

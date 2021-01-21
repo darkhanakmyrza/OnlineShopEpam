@@ -10,7 +10,7 @@ import static com.epam.onlineShop.util.constants.ConstantNames.*;
 public class UserFactory {
     private static UserFactory instance = new UserFactory();
 
-    public User fillUser(HttpServletRequest request) {
+    public User fillUser(HttpServletRequest request, boolean admin) {
         User newUser = new User();
         newUser.setFirstName(request.getParameter("firstName"));
         newUser.setLastName(request.getParameter("lastName"));
@@ -18,7 +18,7 @@ public class UserFactory {
         String password = request.getParameter("password");
         String securedPassword = DigestUtils.md5Hex(password);
         newUser.setPassword(securedPassword);
-        newUser.setAdmin(false);
+        newUser.setAdmin(admin);
         newUser.setActive(true);
         return newUser;
     }
