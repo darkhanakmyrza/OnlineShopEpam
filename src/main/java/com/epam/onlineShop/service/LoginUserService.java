@@ -15,6 +15,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 
+import static com.epam.onlineShop.validator.ValidateActiveUser.checkAccess;
+
 public class LoginUserService implements Service {
 
     private ServiceFactory serviceFactory = ServiceFactory.getInstance();
@@ -35,14 +37,18 @@ public class LoginUserService implements Service {
             User user = userDao.getUserByLoginPassword(login, securedPassword);
 
             if (user != null) {
-                if(user.isActive()) {
+                if(checkAccess(user)) {
                     session.setAttribute("user", user);
                     session.setAttribute("admin", user.isAdmin());
                     serviceFactory.getService("/home").execute(request, response);
                 }else{
-                    response.sendRedirect("login");
+                    request.setAttribute("error", "You are blocked");
+                    dispatcher = request.getRequestDispatcher("login.jsp");
+                    dispatcher.forward(request, response);
+
                 }
             } else {
+                request.setAttribute("error", "Email or password is wrong");
                 dispatcher = request.getRequestDispatcher("login.jsp");
                 dispatcher.forward(request, response);
             }

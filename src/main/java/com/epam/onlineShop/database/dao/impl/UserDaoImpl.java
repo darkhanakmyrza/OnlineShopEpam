@@ -25,6 +25,7 @@ public class UserDaoImpl extends ConnectionPool implements UserDao{
             " USER WHERE email = ? AND password = ?";
     private static final String GET_ALL_USERS = "SELECT * FROM USER WHERE admin = 0";
     private static final String UPDATE_USER_ACTIVITY = "UPDATE USER SET  active = ? WHERE id = ?";
+    private static final String CHECK_LOGIN = "SELECT * FROM user WHERE email = ?";
 
     public UserDaoImpl()  {
     }
@@ -95,6 +96,35 @@ public class UserDaoImpl extends ConnectionPool implements UserDao{
         }
         return user;
     }
+
+    public boolean isEmailExist(String email) throws SQLException, IOException {
+        boolean isExist = false;
+        Connection con = null;
+        try {
+            con = getConnection();
+            PreparedStatement preparedStatement = con.prepareStatement(CHECK_LOGIN);
+            preparedStatement.setString(1, email);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                isExist = true;
+            }
+
+            resultSet.close();
+            preparedStatement.close();
+            releaseConnection(con);
+
+        } catch (Exception e) {
+            try {
+                if (con != null)
+                    con.close();
+            } catch (SQLException e2) {
+            }
+            LOGGER.error(e);
+        }
+        return isExist;
+    }
+
     public List<User> getUsers() throws SQLException, IOException{
         List<User> users = new ArrayList<>();
         Connection con = null;

@@ -12,5 +12,6 @@ public interface UserDao {
     List<User> getUsers() throws SQLException, IOException;
     User getUserByLoginPassword(String login,String password) throws SQLException, IOException;
     void ActivateUser(long userId, boolean isActive) throws SQLException, IOException;
+    boolean isEmailExist(String email) throws SQLException, IOException;
 
 }

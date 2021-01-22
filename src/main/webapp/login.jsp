@@ -52,6 +52,7 @@
 
 
 <div class="container">
+    <h3 style="color:red"><c:out value="${error}" /> </h3>
     <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6">
