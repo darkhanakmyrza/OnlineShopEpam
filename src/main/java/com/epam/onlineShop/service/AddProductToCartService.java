@@ -15,6 +15,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.List;
+import static com.epam.onlineShop.util.constants.ConstantNames.*;
+import static com.epam.onlineShop.util.constants.ConstantPageNames.*;
 
 public class AddProductToCartService implements Service {
     CartDao cartDao = new CartDaoImpl();
@@ -24,8 +26,8 @@ public class AddProductToCartService implements Service {
 
         HttpSession session = request.getSession();
 
-        long productId = Long.valueOf(request.getParameter("productId"));
-        long userId = ((User)session.getAttribute("user")).getId();
+        long productId = Long.valueOf(request.getParameter(PRODUCT_ID));
+        long userId = ((User)session.getAttribute(USER)).getId();
         List<Long> productInCart =cartDao.getProductsInCart(userId);
         boolean alreadyInCart = false;
         for(Long product : productInCart){
@@ -37,9 +39,9 @@ public class AddProductToCartService implements Service {
         if(!alreadyInCart){
             Cart cart = cartFactory.fillCart(request);
             cartDao.addProductToCart(cart);
-            response.sendRedirect("cart");
+            response.sendRedirect(CART_SERVICE);
         }else{
-            response.sendRedirect("home");
+            response.sendRedirect(HOME_SERVICE);
         }
     }
 }

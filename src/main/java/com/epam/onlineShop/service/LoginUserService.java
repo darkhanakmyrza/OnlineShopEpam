@@ -14,6 +14,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
+import static com.epam.onlineShop.util.constants.ConstantNames.*;
+import static com.epam.onlineShop.util.constants.ConstantPageNames.*;
 
 import static com.epam.onlineShop.validator.ValidateActiveUser.checkAccess;
 
@@ -29,8 +31,8 @@ public class LoginUserService implements Service {
         HttpSession session = request.getSession();
 
 
-        String login = request.getParameter("email");
-        String password = request.getParameter("password");
+        String login = request.getParameter(EMAIL);
+        String password = request.getParameter(PASSWORD);
 
         if (login != null && password != null) {
             String securedPassword = DigestUtils.md5Hex(password);
@@ -38,23 +40,23 @@ public class LoginUserService implements Service {
 
             if (user != null) {
                 if(checkAccess(user)) {
-                    session.setAttribute("user", user);
-                    session.setAttribute("admin", user.isAdmin());
-                    serviceFactory.getService("/home").execute(request, response);
+                    session.setAttribute(USER, user);
+                    session.setAttribute(ADMIN, user.isAdmin());
+                    response.sendRedirect(HOME_SERVICE);
                 }else{
-                    request.setAttribute("error", "You are blocked");
-                    dispatcher = request.getRequestDispatcher("login.jsp");
+                    request.setAttribute(ERROR, ERROR_USER_BLOCKED);
+                    dispatcher = request.getRequestDispatcher(LOGIN_JSP);
                     dispatcher.forward(request, response);
 
                 }
             } else {
-                request.setAttribute("error", "Email or password is wrong");
-                dispatcher = request.getRequestDispatcher("login.jsp");
+                request.setAttribute(ERROR, ERROR_EMAIL_OR_PASSWORD);
+                dispatcher = request.getRequestDispatcher(LOGIN_JSP);
                 dispatcher.forward(request, response);
             }
 
         } else {
-            dispatcher = request.getRequestDispatcher("login.jsp");
+            dispatcher = request.getRequestDispatcher(LOGIN_JSP);
             dispatcher.forward(request, response);
         }
     }

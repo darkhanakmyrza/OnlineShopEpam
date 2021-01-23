@@ -8,14 +8,17 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 
+import static com.epam.onlineShop.util.constants.ConstantNames.*;
+import static com.epam.onlineShop.util.constants.ConstantPageNames.*;
+
 public class LogOutUserService implements Service{
 
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ParseException, SQLException {
         HttpSession session = request.getSession();
-        session.setAttribute("user", null);
+        session.setAttribute(USER, null);
 
-        response.sendRedirect("login.jsp");
+        response.sendRedirect(LOGIN_JSP);
     }
 }

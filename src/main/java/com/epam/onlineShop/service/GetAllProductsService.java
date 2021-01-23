@@ -16,6 +16,10 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.List;
 
+import static com.epam.onlineShop.util.constants.ConstantNames.*;
+import static com.epam.onlineShop.util.constants.ConstantPageNames.*;
+
+
 public class GetAllProductsService implements Service {
     private ServiceFactory serviceFactory = ServiceFactory.getInstance();
     private ProductDao productDao = new ProductDaoImpl();
@@ -28,9 +32,9 @@ public class GetAllProductsService implements Service {
         List<Product> products = productDao.getAllProduct();
 
 
-        request.setAttribute("products", products);
+        request.setAttribute(PRODUCTS, products);
 
-        dispatcher = request.getRequestDispatcher("home.jsp");
+        dispatcher = request.getRequestDispatcher(HOME_JSP);
         dispatcher.forward(request, response);
     }
 }

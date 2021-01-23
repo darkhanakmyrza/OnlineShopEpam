@@ -14,13 +14,16 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.List;
 
+import static com.epam.onlineShop.util.constants.ConstantNames.*;
+import static com.epam.onlineShop.util.constants.ConstantPageNames.*;
+
 public class DeleteProductService implements Service{
     ProductDao productDao = new ProductDaoImpl();
     CartDao cartDao = new CartDaoImpl();
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ParseException, SQLException {
 
-        long productId = Long.valueOf(request.getParameter("productId"));
+        long productId = Long.valueOf(request.getParameter(PRODUCT_ID));
 
         List<Cart> carts = cartDao.getAllFromCart(productId);
         for(Cart eachProductInCart : carts){
@@ -29,7 +32,7 @@ public class DeleteProductService implements Service{
 
         productDao.deleteProduct(productId);
 
-        response.sendRedirect("home");
+        response.sendRedirect(HOME_SERVICE);
 
     }
 }

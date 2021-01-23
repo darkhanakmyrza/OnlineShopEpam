@@ -10,12 +10,15 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 
+import static com.epam.onlineShop.util.constants.ConstantNames.*;
+import static com.epam.onlineShop.util.constants.ConstantPageNames.*;
+
 public class ActivateUserService implements Service{
     UserDao userDao = new UserDaoImpl();
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ParseException, SQLException {
 
-        long userId = Long.valueOf(request.getParameter("userId"));
+        long userId = Long.valueOf(request.getParameter(USER_ID));
         userDao.ActivateUser(userId, true);
 
         response.sendRedirect("allUsers");

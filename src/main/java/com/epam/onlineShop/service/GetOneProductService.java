@@ -12,6 +12,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
+import static com.epam.onlineShop.util.constants.ConstantNames.*;
+import static com.epam.onlineShop.util.constants.ConstantPageNames.*;
 
 public class GetOneProductService implements Service{
     private ServiceFactory serviceFactory = ServiceFactory.getInstance();
@@ -22,11 +24,11 @@ public class GetOneProductService implements Service{
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ParseException, SQLException {
         RequestDispatcher dispatcher;
 
-        long productId = Long.valueOf(request.getParameter("id"));
+        long productId = Long.valueOf(request.getParameter(ID));
         Product product = productDao.getProductById(productId);
 
-        request.setAttribute("product", product);
-        dispatcher = request.getRequestDispatcher("product_detail.jsp");
+        request.setAttribute(PRODUCT, product);
+        dispatcher = request.getRequestDispatcher(PRODUCT_DETAIL_JSP);
         dispatcher.forward(request, response);
 
 

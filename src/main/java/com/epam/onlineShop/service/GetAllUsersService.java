@@ -13,6 +13,9 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.List;
+import static com.epam.onlineShop.util.constants.ConstantNames.*;
+import static com.epam.onlineShop.util.constants.ConstantPageNames.*;
+
 
 public class GetAllUsersService implements Service {
     UserDao userDao = new UserDaoImpl();
@@ -21,16 +24,16 @@ public class GetAllUsersService implements Service {
         HttpSession session = request.getSession();
         RequestDispatcher dispatcher;
 
-        User currentUser = (User)session.getAttribute("user");
+        User currentUser = (User)session.getAttribute(USER);
         if(currentUser.isAdmin()){
             List<User> users = userDao.getUsers();
-            request.setAttribute("users", users);
+            request.setAttribute(USERS, users);
 
-            dispatcher = request.getRequestDispatcher("all_users.jsp");
+            dispatcher = request.getRequestDispatcher(ALL_USERS_JSP);
             dispatcher.forward(request, response);
 
         }else {
-            response.sendRedirect("login");
+            response.sendRedirect(LOGIN_SERVICE);
         }
     }
 }

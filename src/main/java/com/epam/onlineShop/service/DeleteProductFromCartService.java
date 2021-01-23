@@ -12,6 +12,9 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 
+import static com.epam.onlineShop.util.constants.ConstantNames.*;
+import static com.epam.onlineShop.util.constants.ConstantPageNames.*;
+
 public class DeleteProductFromCartService implements Service {
     CartDao cartDao = new CartDaoImpl();
 
@@ -19,11 +22,11 @@ public class DeleteProductFromCartService implements Service {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ParseException, SQLException {
 
         HttpSession session = request.getSession();
-        long userId = ((User)session.getAttribute("user")).getId();
+        long userId = ((User)session.getAttribute(USER)).getId();
 
-        long productId = Long.valueOf(request.getParameter("productId"));
+        long productId = Long.valueOf(request.getParameter(PRODUCT_ID));
         cartDao.DeleteProductInCart(productId,userId);
-        response.sendRedirect("cart");
+        response.sendRedirect(CART_SERVICE);
 
 
     }

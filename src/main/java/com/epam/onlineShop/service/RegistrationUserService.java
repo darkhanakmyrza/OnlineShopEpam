@@ -13,8 +13,8 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import static com.epam.onlineShop.validator.ValidateRegistration.*;
 
-import static com.epam.onlineShop.util.constants.ConstantNames.ADMIN;
-import static com.epam.onlineShop.util.constants.ConstantNames.USER;
+import static com.epam.onlineShop.util.constants.ConstantNames.*;
+import static com.epam.onlineShop.util.constants.ConstantPageNames.*;
 
 public class RegistrationUserService implements Service{
     private UserFactory userFactory = UserFactory.getInstance();
@@ -26,25 +26,20 @@ public class RegistrationUserService implements Service{
         HttpSession session = request.getSession();
         RequestDispatcher dispatcher;
 
-
-
-        if(request.getParameter("email") != null) {
-            String email = request.getParameter("email") ;
+        if(request.getParameter(EMAIL) != null) {
+            String email = request.getParameter(EMAIL) ;
             if(userDao.isEmailExist(email)){
-                System.out.println("r1");
-                request.setAttribute("error", "Email already exist");
-                dispatcher = request.getRequestDispatcher("registration.jsp");
 
+                request.setAttribute(ERROR, ERROR_EMAIL_EXIST);
+                dispatcher = request.getRequestDispatcher(REGISTRATION_JSP);
                 dispatcher.forward(request, response);
             }else if(!validateMailWithRegex(email)) {
-                System.out.println("r2");
-                request.setAttribute("error", "Not correct format of mail, please type it again");
-                dispatcher = request.getRequestDispatcher("registration.jsp");
+                request.setAttribute(ERROR, ERROR_EMAIL_FORMAT);
+                dispatcher = request.getRequestDispatcher(REGISTRATION_JSP);
                 dispatcher.forward(request, response);
-            }else if(!validatePasswordWithRegex(request.getParameter("password"))){
-                System.out.println("r3");
-                request.setAttribute("error", "Not correct format of password, please type it again");
-                dispatcher = request.getRequestDispatcher("registration.jsp");
+            }else if(!validatePasswordWithRegex(request.getParameter(PASSWORD))){
+                request.setAttribute(ERROR, ERROR_PASSWORD_FORMAT);
+                dispatcher = request.getRequestDispatcher(REGISTRATION_JSP);
                 dispatcher.forward(request, response);
             }else{
                 User newUser = userFactory.fillUser(request,false);
@@ -52,11 +47,11 @@ public class RegistrationUserService implements Service{
                 newUser.setId(userDao.getUserByLoginPassword(newUser.getEmail(), newUser.getPassword()).getId());
                 session.setAttribute(USER, newUser);
                 session.setAttribute(ADMIN, newUser.isAdmin());
-                response.sendRedirect("home");
+                response.sendRedirect(HOME_SERVICE);
             }
 
         }else{
-            dispatcher = request.getRequestDispatcher("registration.jsp");
+            dispatcher = request.getRequestDispatcher(REGISTRATION_JSP);
             dispatcher.forward(request, response);
         }
     }

@@ -13,29 +13,30 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
+import static com.epam.onlineShop.util.constants.ConstantNames.*;
+import static com.epam.onlineShop.util.constants.ConstantPageNames.*;
 
 public class CreateNewProductService implements Service{
     ProductDao productDao = new ProductDaoImpl();
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ParseException, SQLException {
-        //do checking
-        //not access without admin login
+
         RequestDispatcher dispatcher;
         HttpSession session = request.getSession();
         Product product = new Product();
-        String productName = request.getParameter("name");
+        String productName = request.getParameter(NAME);
 
         if(productName!=null) {
-            product.setName(request.getParameter("name"));
-            product.setDescription(request.getParameter("description"));
-            product.setImage_url(request.getParameter("image_url"));
-            product.setPrice(Long.valueOf(request.getParameter("price")));
-            product.setUserId(((User)session.getAttribute("user")).getId());
+            product.setName(request.getParameter(NAME));
+            product.setDescription(request.getParameter(DESCRIPTION));
+            product.setImage_url(request.getParameter(IMAGE_URL));
+            product.setPrice(Long.valueOf(request.getParameter(PRICE)));
+            product.setUserId(((User)session.getAttribute(USER)).getId());
             productDao.createProduct(product);
-            response.sendRedirect("home");
+            response.sendRedirect(HOME_SERVICE);
         }else{
-            dispatcher = request.getRequestDispatcher("createProduct.jsp");
+            dispatcher = request.getRequestDispatcher(CREATE_PRODUCT_JSP);
             dispatcher.forward(request, response);
         }
     }

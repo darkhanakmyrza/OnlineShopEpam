@@ -13,6 +13,9 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
+import static com.epam.onlineShop.util.constants.ConstantNames.*;
+import static com.epam.onlineShop.util.constants.ConstantPageNames.*;
+
 
 public class UpdateProductService implements Service {
     ProductDao productDao = new ProductDaoImpl();
@@ -22,22 +25,22 @@ public class UpdateProductService implements Service {
         RequestDispatcher dispatcher;
         HttpSession session = request.getSession();
 
-        String productName = request.getParameter("name");
+        String productName = request.getParameter(NAME);
         System.out.println(productName);
         if(productName!=null) {
             Product product = new Product();
-            product.setName(request.getParameter("name"));
-            product.setDescription(request.getParameter("description"));
-            product.setImage_url(request.getParameter("image_url"));
-            product.setPrice(Long.valueOf(request.getParameter("price")));
-            product.setUserId(((User)session.getAttribute("user")).getId());
-            product.setId(Long.valueOf(request.getParameter("productId")));
+            product.setName(request.getParameter(NAME));
+            product.setDescription(request.getParameter(DESCRIPTION));
+            product.setImage_url(request.getParameter(IMAGE_URL));
+            product.setPrice(Long.valueOf(request.getParameter(PRICE)));
+            product.setUserId(((User)session.getAttribute(USER)).getId());
+            product.setId(Long.valueOf(request.getParameter(PRODUCT_ID)));
             productDao.updateProduct(product);
-            response.sendRedirect("home");
+            response.sendRedirect(HOME_SERVICE);
         }else{
-            Product product = productDao.getProductById(Long.valueOf(request.getParameter("productId")));
-            request.setAttribute("product", product);
-            dispatcher = request.getRequestDispatcher("updateProduct.jsp");
+            Product product = productDao.getProductById(Long.valueOf(request.getParameter(PRODUCT_ID)));
+            request.setAttribute(PRODUCT, product);
+            dispatcher = request.getRequestDispatcher(UPDATE_PRODUCT_JSP);
             dispatcher.forward(request, response);
         }
     }

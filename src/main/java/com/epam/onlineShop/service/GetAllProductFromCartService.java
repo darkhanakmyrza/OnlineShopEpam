@@ -18,6 +18,8 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import static com.epam.onlineShop.util.constants.ConstantNames.*;
+import static com.epam.onlineShop.util.constants.ConstantPageNames.*;
 
 public class GetAllProductFromCartService implements Service{
     CartDao cartDao = new CartDaoImpl();
@@ -26,7 +28,7 @@ public class GetAllProductFromCartService implements Service{
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ParseException, SQLException {
         RequestDispatcher dispatcher;
         HttpSession session = request.getSession();
-        long userId = ((User)session.getAttribute("user")).getId();
+        long userId = ((User)session.getAttribute(USER)).getId();
 
         List<Long> productIdsInCart = cartDao.getProductsInCart(userId);
 
@@ -38,10 +40,10 @@ public class GetAllProductFromCartService implements Service{
             sumOfPrice += product.getPrice();
         }
 
-        request.setAttribute("productIdsInCart",products_in_cart);
-        request.setAttribute("sumOfPrice", sumOfPrice);
+        request.setAttribute(PRODUCT_IDS_IN_CART,products_in_cart);
+        request.setAttribute(SUM_OF_PRICE, sumOfPrice);
 
-        dispatcher = request.getRequestDispatcher("cart.jsp");
+        dispatcher = request.getRequestDispatcher(CART_JSP);
         dispatcher.forward(request, response);
 
 
