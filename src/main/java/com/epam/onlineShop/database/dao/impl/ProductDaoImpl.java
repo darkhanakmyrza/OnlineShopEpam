@@ -15,7 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDaoImpl extends ConnectionPool implements ProductDao {
+
     private final Logger LOGGER = LogManager.getLogger(this.getClass().getName());
+
     private static final String GET_ALL_PRODUCTS = "SELECT * FROM product";
     private static final String GET_PRODUCT = "SELECT * FROM product WHERE id = ?";
     private static final String INSERT_PRODUCT = "INSERT product(name, description, price, image_url, user_id) VALUES(?,?,?,?,?)";

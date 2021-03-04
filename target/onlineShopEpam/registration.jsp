@@ -59,8 +59,6 @@
                        autofocus>
 
 
-
-
                 <input name="firstName" id="FirstName" class="form-control setMargin" placeholder="FirstName"
                        required autofocus>
 

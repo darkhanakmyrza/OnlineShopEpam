@@ -13,6 +13,7 @@ CREATE TABLE user (
 );
 
 --creating product table
+--to do delete user_id
 CREATE TABLE product(
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(45) NOT NULL,
@@ -31,6 +32,53 @@ CREATE TABLE cart(
     FOREIGN KEY (product_id) REFERENCES product(id),
     FOREIGN KEY (user_id) REFERENCES user(id)
 );
+
+
+CREATE TABLE ordering_status(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    status_name VARCHAR(45) NOT NULL
+);
+
+INSERT INTO `onlineshopepam`.`ordering_status` (`id`, `status_name`) VALUES ('1', 'wont be send');
+INSERT INTO `onlineshopepam`.`ordering_status` (`id`, `status_name`) VALUES ('2', 'canceled');
+INSERT INTO `onlineshopepam`.`ordering_status` (`id`, `status_name`) VALUES ('3', 'arrived');
+INSERT INTO `onlineshopepam`.`ordering_status` (`id`, `status_name`) VALUES ('4', 'shipped');
+INSERT INTO `onlineshopepam`.`ordering_status` (`id`, `status_name`) VALUES ('5', 'pending');
+
+
+CREATE TABLE address(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    country VARCHAR(45) NOT NULL,
+    city VARCHAR(45) NOT NULL,
+    street VARCHAR(45) NOT NULL,
+    phone VARCHAR(45) NOT NULL
+);
+
+INSERT INTO `onlineshopepam`.`address` (`id`, `country`, `city`, `street`, `phone`) VALUES (1, 'Kazakhstan', 'Aktobe', 'batys2', '87712944996');
+INSERT INTO `onlineshopepam`.`address` (`id`, `country`, `city`, `street`, `phone`) VALUES (2, 'Russia', 'Moscow', 'stts', '8443232');
+
+
+
+CREATE TABLE order(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    date_time DATETIME NOT NULL,
+    status INT,
+    delivery_address INT,
+    FOREIGN KEY (status) REFERENCES ordering_status(id),
+    FOREIGN KEY (delivery_address) REFERENCES address(id)
+);
+
+CREATE TABLE order_item(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    product_id INT,
+    user_id INT,
+    order_id INT,
+    FOREIGN KEY (order_id) REFERENCES order(id),
+    FOREIGN KEY (product_id) REFERENCES product(id),
+    FOREIGN KEY (user_id) REFERENCES user(id)
+);
+
+
 
 -- admin user with password 1
 insert user values(1,'admin','admin', 'ad@gmail.com', 'c4ca4238a0b923820dcc509a6f75849b',1,1);
@@ -68,3 +116,5 @@ insert product values(2, 'Lenovo thinkPad',
 399500,
 'https://cdn-kaspi.kz/shop/medias/sys_master/images/images/h3f/hf4/13549040467998/lenovo-thinkpad-t490-20n2004grt-cernyj-100377620-4.png',
 1);
+
+
