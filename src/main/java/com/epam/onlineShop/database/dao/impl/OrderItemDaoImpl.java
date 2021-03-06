@@ -40,7 +40,7 @@ public class OrderItemDaoImpl extends ConnectionPool implements OrderItemDao {
                     con.close();
             } catch (SQLException e2) {
             }
-            LOGGER.error(e);
+            System.out.println(e);
         }
     }
 }

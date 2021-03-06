@@ -50,7 +50,6 @@
 </head>
 <body>
 
-
 <div class="container">
     <h3 style="color:red"><c:out value="${error}" /> </h3>
     <div class="row">

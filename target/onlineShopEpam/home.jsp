@@ -73,6 +73,9 @@
                             <div class="col-sm-3">
                                 <div class="form-sh"> <a class="btn" href="allUsers">Manage users</a> </div>
                             </div>
+                            <div class="col-sm-3">
+                                <div class="form-sh"> <a class="btn" href="orderAdmin">Orders</a> </div>
+                            </div>
                         </c:if>
                         <c:if test="${sessionScope.user.isAdmin() == false}">
                             <div class="col-sm-3">
