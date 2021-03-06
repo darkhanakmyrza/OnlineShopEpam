@@ -72,6 +72,8 @@ public class CreateOrderFromCartProductsService implements Service{
             orderItemDao.createOrderItem(orderItem);
 
         }
+        //to-do delete from cart,
+        cartDao.deleteProductFromCartByUserId(userId);
 
         response.sendRedirect(HOME_SERVICE);
 

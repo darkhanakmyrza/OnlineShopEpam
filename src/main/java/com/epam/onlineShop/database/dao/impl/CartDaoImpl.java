@@ -27,6 +27,7 @@ public class CartDaoImpl extends ConnectionPool implements CartDao {
     private static final String DELETE_PRODUCT_BY_PRODUCT_ID_FROM_CART = "DELETE FROM cart WHERE product_id = ? AND user_id = ?";
     private static final String GET_CART_ID_FROM_CART = "SELECT id FROM cart WHERE product_id = ? AND user_id = ?";
     private static final String GET_ALL_FROM_CART = "SELECT * FROM cart WHERE product_id = ?";
+    private static final String DELETE_PRODUCTS_FROM_CART_BY_USER = "DELETE FROM onlineshopepam.cart WHERE user_id=?";
 
     public void addProductToCart(Cart cart)throws SQLException, IOException {
         Connection con = null;
@@ -159,6 +160,27 @@ public class CartDaoImpl extends ConnectionPool implements CartDao {
             LOGGER.error(e);
         }
         return carts;
+    }
+
+    @Override
+    public void deleteProductFromCartByUserId(long userId)throws SQLException, IOException{
+        Connection con = null;
+        try{
+            con = getConnection();
+            PreparedStatement preparedStatement = con.prepareStatement(DELETE_PRODUCTS_FROM_CART_BY_USER);
+            preparedStatement.setLong(1,userId);
+            int rows = preparedStatement.executeUpdate();
+            preparedStatement.close();
+            releaseConnection(con);
+
+        }catch (Exception e) {
+            try {
+                if (con != null)
+                    con.close();
+            } catch (SQLException e2) {
+            }
+            LOGGER.info(e);
+        }
     }
 
 

@@ -12,4 +12,5 @@ public interface OrderDao {
     Long takeLastID() throws SQLException;
     ArrayList<Order> getAllOrder() throws SQLException, IOException;
     ArrayList<ArrayList<String>> getFrom4Tables() throws SQLException, IOException;
+    void changeOrderStatus(Long orderId, Long statusId) throws SQLException, IOException;
 }

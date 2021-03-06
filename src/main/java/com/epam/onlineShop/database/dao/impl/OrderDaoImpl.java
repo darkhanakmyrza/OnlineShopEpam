@@ -25,8 +25,8 @@ public class OrderDaoImpl extends ConnectionPool implements OrderDao {
             "INNER JOIN onlineshopepam.ordering_status ON onlineshopepam.order.status=onlineshopepam.ordering_status.id\n" +
             "INNER JOIN onlineshopepam.order_item ON onlineshopepam.order.id = onlineshopepam.order_item.order_id\n" +
             "INNER JOIN onlineshopepam.user ON onlineshopepam.user.id = onlineshopepam.order_item.user_id\n" +
-            "GROUP BY onlineshopepam.order.id;";
-    
+            "GROUP BY onlineshopepam.order.id";
+    private static final String UPDATE_STATUS_ORDER = "UPDATE onlineshopepam.order SET  status = ? WHERE id = ?";
 
     @Override
     public void createOrder(Order order) throws SQLException, IOException {
@@ -138,5 +138,32 @@ public class OrderDaoImpl extends ConnectionPool implements OrderDao {
             LOGGER.error(e);
         }
         return orders;
+    }
+
+    @Override
+    public void changeOrderStatus(Long orderId, Long statusId) throws SQLException, IOException{
+        Connection con = null;
+        try{
+            con = getConnection();
+            PreparedStatement pstmt = con.prepareStatement(UPDATE_STATUS_ORDER);
+
+            pstmt.setLong(1,statusId);
+            pstmt.setLong(2,orderId);
+
+            int count = pstmt.executeUpdate();
+            if (count != 1)
+                throw new SQLException("Insert updated " + count + " rows");
+
+            pstmt.close();
+            releaseConnection(con);
+
+        }catch (Exception e) {
+            try {
+                if (con != null)
+                    con.close();
+            } catch (SQLException e2) {
+            }
+            System.out.println(e);
+        }
     }
 }
