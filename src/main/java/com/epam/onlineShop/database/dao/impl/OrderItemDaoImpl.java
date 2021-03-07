@@ -16,7 +16,7 @@ public class OrderItemDaoImpl extends ConnectionPool implements OrderItemDao {
 
     private final Logger LOGGER = LogManager.getLogger(this.getClass().getName());
     private static final String INSERT_INTO_ORDER_ITEM = "INSERT order_item(product_id, user_id, order_id) VALUES(?,?,?)";
-    private static final String SELECT_PRODUCT_ID = "SELECT product_id FROM onlineshopepam.order_item WHERE order_id = 7;";
+    private static final String SELECT_PRODUCT_ID = "SELECT product_id FROM onlineshopepam.order_item WHERE order_id = ?";
     @Override
     public void createOrderItem(OrderItem orderItem) throws SQLException, IOException {
         Connection con = null;
@@ -51,6 +51,7 @@ public class OrderItemDaoImpl extends ConnectionPool implements OrderItemDao {
         try {
             con = getConnection();
             PreparedStatement pstmt = con.prepareStatement(SELECT_PRODUCT_ID);
+            pstmt.setLong(1,orderId);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 productsId.add(rs.getLong("product_id"));

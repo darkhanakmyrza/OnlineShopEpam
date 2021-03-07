@@ -27,6 +27,13 @@ public class OrderDaoImpl extends ConnectionPool implements OrderDao {
             "INNER JOIN onlineshopepam.user ON onlineshopepam.user.id = onlineshopepam.order_item.user_id\n" +
             "GROUP BY onlineshopepam.order.id";
     private static final String UPDATE_STATUS_ORDER = "UPDATE onlineshopepam.order SET  status = ? WHERE id = ?";
+    private static final String SELECT_ORDERS_BY_USER_ID = "SELECT onlineshopepam.order.id order_id, onlineshopepam.order.date_time, onlineshopepam.ordering_status.status_name\n" +
+            "FROM onlineshopepam.order \n" +
+            "INNER JOIN onlineshopepam.ordering_status ON onlineshopepam.order.status=onlineshopepam.ordering_status.id\n" +
+            "INNER JOIN onlineshopepam.order_item ON onlineshopepam.order.id = onlineshopepam.order_item.order_id\n" +
+            "INNER JOIN onlineshopepam.user ON onlineshopepam.user.id = onlineshopepam.order_item.user_id \n" +
+            "WHERE onlineshopepam.user.id= ?\n" +
+            "GROUP BY onlineshopepam.order.id ";
 
     @Override
     public void createOrder(Order order) throws SQLException, IOException {
@@ -165,5 +172,35 @@ public class OrderDaoImpl extends ConnectionPool implements OrderDao {
             }
             System.out.println(e);
         }
+    }
+
+    @Override
+    public ArrayList<ArrayList<String>> getOrderByUserId(Long userId) throws SQLException, IOException{
+        ArrayList<ArrayList<String>> orders = new ArrayList<>();
+        Connection con = null;
+        try {
+            con = getConnection();
+            PreparedStatement pstmt = con.prepareStatement(SELECT_ORDERS_BY_USER_ID);
+            pstmt.setLong(1,userId);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                ArrayList<String> order =new ArrayList<>();
+                order.add(String.valueOf(rs.getLong("order_id")));
+                order.add(String.valueOf(rs.getTimestamp("date_time")));
+                order.add(rs.getString("status_name"));
+                orders.add(order);
+            }
+            pstmt.close();
+            releaseConnection(con);
+
+        }catch (Exception e) {
+            try {
+                if (con != null)
+                    con.close();
+            } catch (SQLException e2) {
+            }
+            System.out.println(e);
+        }
+        return orders;
     }
 }

@@ -47,7 +47,7 @@ public class OrderDetailAdminService implements Service{
         request.setAttribute("statuses", statuses);
         request.setAttribute("currentStatus", currentStatus);
         request.setAttribute("orderId", orderId);
-
+        System.out.println(products);
         dispatcher = request.getRequestDispatcher("OrderDetail.jsp");
         dispatcher.forward(request, response);
     }
