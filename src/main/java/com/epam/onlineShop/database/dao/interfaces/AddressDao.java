@@ -9,4 +9,5 @@ import java.sql.SQLException;
 public interface AddressDao {
     void createAddress(Address address)throws SQLException, IOException;
     Long takeLastID() throws SQLException;
+    void deleteAddressById(Long addressId) throws SQLException, IOException;
 }

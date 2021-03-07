@@ -56,8 +56,11 @@
                     </a>
                 </div>
                 </c:forEach>
-
+                <form action="order.jsp" method="post">
+                    <button  class="btn btn-success">Order this products</button>
+                </form>
             </div>
+
         </div>
     </div>
 </div>

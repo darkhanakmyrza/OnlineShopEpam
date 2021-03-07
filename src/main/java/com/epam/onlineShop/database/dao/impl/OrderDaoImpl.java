@@ -4,6 +4,7 @@ import com.epam.onlineShop.database.connection.ConnectionPool;
 import com.epam.onlineShop.database.dao.interfaces.OrderDao;
 import com.epam.onlineShop.entity.Order;
 import com.epam.onlineShop.entity.Product;
+import com.sun.org.apache.xpath.internal.operations.Or;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -18,7 +19,7 @@ public class OrderDaoImpl extends ConnectionPool implements OrderDao {
 
     private final Logger LOGGER = LogManager.getLogger(this.getClass().getName());
     private static final String SELECT_LAST_ID_FROM_ORDER = "SELECT MAX(id) FROM onlineshopepam.order";
-    private static final String INSERT_INTO_ORDER = "INSERT onlineshopepam.order(date_time, status, delivery_address) VALUES(?,?,?)";
+    private static final String INSERT_INTO_ORDER = "INSERT onlineshopepam.order(date_time, status, delivery_address, id) VALUES(?,?,?,?)";
     private static final String SELECT_ALL_FROM_ORDER = "SELECT * FROM onlineshopepam.order";
     private static final String SELECT_FROM_4_TABLES = "SELECT onlineshopepam.order.id order_id, onlineshopepam.order.date_time, onlineshopepam.user.email user_email, onlineshopepam.ordering_status.status_name\n" +
             "FROM onlineshopepam.order \n" +
@@ -34,6 +35,8 @@ public class OrderDaoImpl extends ConnectionPool implements OrderDao {
             "INNER JOIN onlineshopepam.user ON onlineshopepam.user.id = onlineshopepam.order_item.user_id \n" +
             "WHERE onlineshopepam.user.id= ?\n" +
             "GROUP BY onlineshopepam.order.id ";
+    private static final String DELETE_ORDER_BY_ID = "DELETE FROM onlineshopepam.order WHERE id = ?";
+    private static final String SELECT_ORDER_BY_ID = "SELECT * FROM onlineshopepam.order WHERE id = ?";
 
     @Override
     public void createOrder(Order order) throws SQLException, IOException {
@@ -44,6 +47,7 @@ public class OrderDaoImpl extends ConnectionPool implements OrderDao {
             pstmt.setTimestamp(1,order.getDateTime());
             pstmt.setLong(2, order.getStatusId());
             pstmt.setLong(3, order.getDeliveryAddressId());
+            pstmt.setLong(4,order.getId());
 
             int count = pstmt.executeUpdate();
             if (count != 1)
@@ -202,5 +206,61 @@ public class OrderDaoImpl extends ConnectionPool implements OrderDao {
             System.out.println(e);
         }
         return orders;
+    }
+
+    @Override
+    public void deleteOrderById(Long orderId) throws SQLException, IOException {
+        Connection con = null;
+        try{
+            con = getConnection();
+            PreparedStatement pstmt = con.prepareStatement(DELETE_ORDER_BY_ID);
+            pstmt.setLong(1, orderId);
+
+            int count = pstmt.executeUpdate();
+            if (count != 1)
+                throw new SQLException("deleted " + count + " rows");
+
+            pstmt.close();
+            releaseConnection(con);
+
+        }catch (Exception e) {
+            try {
+                if (con != null)
+                    con.close();
+            } catch (SQLException e2) {
+            }
+            System.out.println(e);
+        }
+    }
+
+    @Override
+    public Order getOrderById(Long orderId) throws SQLException, IOException {
+        Order order = new Order();
+        Connection con = null;
+        try {
+            con = getConnection();
+            PreparedStatement pstmt = con.prepareStatement(SELECT_ORDER_BY_ID);
+            pstmt.setLong(1,orderId);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+
+                order.setId(rs.getLong("id"));
+                order.setDateTime(rs.getTimestamp("date_time"));
+                order.setDeliveryAddressId(rs.getLong("delivery_address"));
+                order.setStatusId(rs.getLong("status"));
+
+            }
+            pstmt.close();
+            releaseConnection(con);
+
+        }catch (Exception e) {
+            try {
+                if (con != null)
+                    con.close();
+            } catch (SQLException e2) {
+            }
+            System.out.println(e);
+        }
+        return order;
     }
 }

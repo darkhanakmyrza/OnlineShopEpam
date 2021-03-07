@@ -9,6 +9,7 @@
 
 
 <div class="container">
+    <h1>All of users in the website</h1>
     <table class="table">
         <thead>
         <tr>

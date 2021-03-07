@@ -15,8 +15,10 @@ import java.util.List;
 public class OrderItemDaoImpl extends ConnectionPool implements OrderItemDao {
 
     private final Logger LOGGER = LogManager.getLogger(this.getClass().getName());
-    private static final String INSERT_INTO_ORDER_ITEM = "INSERT order_item(product_id, user_id, order_id) VALUES(?,?,?)";
+    private static final String INSERT_INTO_ORDER_ITEM = "INSERT order_item(product_id, user_id, order_id, id) VALUES(?,?,?,?)";
     private static final String SELECT_PRODUCT_ID = "SELECT product_id FROM onlineshopepam.order_item WHERE order_id = ?";
+    private static final String DELETE_ORDER_ITEMS = "DELETE FROM onlineshopepam.order_item WHERE order_id = ?";
+
     @Override
     public void createOrderItem(OrderItem orderItem) throws SQLException, IOException {
         Connection con = null;
@@ -26,6 +28,7 @@ public class OrderItemDaoImpl extends ConnectionPool implements OrderItemDao {
             pstmt.setLong(1, orderItem.getProductId());
             pstmt.setLong(2, orderItem.getUserId());
             pstmt.setLong(3, orderItem.getOrderId());
+            pstmt.setLong(4,orderItem.getId());
 
             int count = pstmt.executeUpdate();
             if (count != 1)
@@ -68,6 +71,31 @@ public class OrderItemDaoImpl extends ConnectionPool implements OrderItemDao {
             LOGGER.error(e);
         }
         return productsId;
+    }
+
+    @Override
+    public void deleteOrderItemsByOrderId(Long orderId) throws SQLException, IOException {
+        Connection con = null;
+        try{
+            con = getConnection();
+            PreparedStatement pstmt = con.prepareStatement(DELETE_ORDER_ITEMS);
+            pstmt.setLong(1, orderId);
+
+            int count = pstmt.executeUpdate();
+            if (count != 1)
+                throw new SQLException("deleted " + count + " rows");
+
+            pstmt.close();
+            releaseConnection(con);
+
+        }catch (Exception e) {
+            try {
+                if (con != null)
+                    con.close();
+            } catch (SQLException e2) {
+            }
+            System.out.println(e);
+        }
     }
 
 

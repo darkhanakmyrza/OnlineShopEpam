@@ -4,34 +4,32 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<!-- Bootstrap CSS  -->
-<%--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">--%>
 
 
 <div class="container">
-    <table class="table">
-        <thead>
-        <tr>
 
-            <th scope="col">User email</th>
-            <th scope="col">Order time</th>
-            <th scope="col">Current order</th>
+    <h1 style="text-align: center">All orders</h1>
 
-        </tr>
-        </thead>
-        <tbody>
+    <div>
+        <div class="one">
+            <div class="two">User email</div>
+            <div class="two">Ordered time</div>
+            <div class="two">Current order status</div>
+        </div>
         <c:forEach var = "order" items="${orders}">
-            <a href="orderDetail?orderId=${order.get(0)}">
-                <tr>
-                    <td>${order.get(2)}</td>
-                    <td>${order.get(1)}</td>
-                    <td>${order.get(3)}</td>
 
-                </tr>
-            </a>
+            <div class="one">
+                <a href="orderDetail?orderId=${order.get(0)}">
+                    <div class="two">${order.get(2)}</div>
+                    <div class="two">${order.get(1)}</div>
+                    <div class="two">${order.get(3)}</div>
+                </a>
+            </div>
+
+
         </c:forEach>
-        </tbody>
-    </table>
+
+    </div>
 </div>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

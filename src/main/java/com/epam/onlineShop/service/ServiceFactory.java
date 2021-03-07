@@ -29,6 +29,7 @@ public class ServiceFactory {
         SERVICE_MAP.put("/ordersUser", new ListOfOrdersForUsersService());
         SERVICE_MAP.put("/orderDetail", new OrderDetailAdminService());
         SERVICE_MAP.put("/changeStatus", new ChangeStatusService());
+        SERVICE_MAP.put("/DeleteOrderAdminService", new DeleteOrderAdminService());
 
 
     }

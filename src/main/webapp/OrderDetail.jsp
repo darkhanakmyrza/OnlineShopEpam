@@ -1,7 +1,7 @@
 
 <%@ include file="header.jsp" %>
 
-<div class="row clearfix">
+<div class="row clearfix center-block">
     <c:forEach var = "product" items="${products }">
         <div class="col-lg-3 col-sm-6 col-md-3">
             <a href="product?id=${product.getId() }">
@@ -28,6 +28,12 @@
             <input type="submit" value="Change status"></p>
         <input type="hidden" name="orderId" value="<c:out value="${orderId}"/>" />
     </form>
+
+    <form action="DeleteOrderAdminService" method="post">
+        <input type="hidden" name="orderId" value="<c:out value="${orderId}"/>" />
+        <button class="btn btn-danger btn-lg">Delete Order</button>
+    </form>
+
 </c:if>
 <c:if test="${sessionScope.user.isAdmin() == false}">
 

@@ -10,4 +10,5 @@ import java.util.ArrayList;
 public interface OrderItemDao {
     void createOrderItem(OrderItem orderItem)throws SQLException, IOException;
     ArrayList<Long> getProductsIdFromOrderItem(Long orderId ) throws SQLException, IOException;
+    void deleteOrderItemsByOrderId(Long orderId) throws SQLException, IOException;
 }
