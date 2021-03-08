@@ -64,10 +64,9 @@
                     </div>
                     <div class="description-box">
                         <div class="dex-a">
-                            <h4>Description</h4>
+                            <h4><fmt:message key="label.descriptionProduct"/></h4>
                             <p><c:out value="${product.getDescription()}" />
                             </p>
-
                         </div>
 
                     </div>
@@ -82,7 +81,7 @@
                         <form action="updateProduct" method="post">
 
                             <input type="hidden" name="productId" value="<c:out value="${product.getId()}"/>" />
-                            <button class="btn btn-danger btn-lg">Update product</button>
+                            <button class="btn btn-danger btn-lg"><fmt:message key="button.updateProduct"/></button>
                         </form>
                         <br>
 <%--                        <form method="POST" action="deleteProduct.do">--%>
@@ -92,13 +91,13 @@
                         <form action="deleteProduct" method="post">
 
                             <input type="hidden" name="productId" value="<c:out value="${product.getId()}"/>" />
-                            <button class="btn btn-danger btn-lg">Delete product</button>
+                            <button class="btn btn-danger btn-lg"><fmt:message key="button.deleteProduct"/></button>
                         </form>
                     </c:if>
                     <br>
-                    <h4>Price</h4>
+                    <h4><fmt:message key="label.price"/></h4>
                     <h3>$<c:out value="${product.getPrice()}" /> </h3>
-                    <p>Option</p>
+
 <%--                    <form method="post" action="addCartAction.do">--%>
 <%--                        <input type="hidden" name="productId" value="<c:out value="${product.getId()}"/>" />--%>
 <%--                        <button class="">Add to cart</button>--%>
@@ -106,7 +105,7 @@
                     <c:if test="${sessionScope.user.isAdmin() == false}">
                         <form action="addProductToCart" method="post">
                             <input type="hidden" name="productId" value="<c:out value="${product.getId()}"/>" />
-                            <button class="">Add to cart</button>
+                            <button class=""><fmt:message key="button.addToCart"/></button>
 
                         </form>
                     </c:if>

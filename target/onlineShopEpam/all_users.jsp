@@ -9,15 +9,15 @@
 
 
 <div class="container">
-    <h1>All of users in the website</h1>
+    <h1><fmt:message key="label.users"/></h1>
     <table class="table">
         <thead>
         <tr>
 
-            <th scope="col">First name</th>
-            <th scope="col">Last name</th>
-            <th scope="col">Email</th>
-            <th scope="col">User activity</th>
+            <th scope="col"><fmt:message key="label.firstName"/></th>
+            <th scope="col"><fmt:message key="label.lastName"/></th>
+            <th scope="col"><fmt:message key="label.emailUser"/></th>
+            <th scope="col"><fmt:message key="label.userActivity"/></th>
 
         </tr>
         </thead>

@@ -179,23 +179,23 @@
 <div class="container">
 
     <form id="contact" action="createProduct" method="post">
-        <h3>Create your own product</h3>
+        <h3><fmt:message key="label.createProductLabel"/></h3>
 
         <fieldset>
-            <input placeholder="Name of the product" name="name" type="text" tabindex="1" required autofocus>
+            <input placeholder="<fmt:message key="label.product"/>" name="name" type="text" tabindex="1" required autofocus>
         </fieldset>
         <fieldset>
-            <input placeholder="Image URL" type="text" tabindex="2" name="image_url" required>
+            <input placeholder="<fmt:message key="label.imageProduct"/>" type="text" tabindex="2" name="image_url" required>
         </fieldset>
         <fieldset>
-            <input placeholder="Price" type="number" tabindex="3" name="price" required>
+            <input placeholder="<fmt:message key="label.price"/>" type="number" tabindex="3" name="price" required>
         </fieldset>
 
         <fieldset>
-            <textarea placeholder="Description of the product" tabindex="5" name="description" required></textarea>
+            <textarea placeholder="<fmt:message key="label.descriptionProduct"/>" tabindex="5" name="description" required></textarea>
         </fieldset>
         <fieldset>
-            <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit</button>
+            <button name="submit" type="submit" id="contact-submit" data-submit="...Sending"><fmt:message key="button.submit"/></button>
         </fieldset>
 
     </form>

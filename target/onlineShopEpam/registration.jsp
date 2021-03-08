@@ -7,8 +7,11 @@
 --%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<fmt:setLocale value="${sessionScope.language}"/>
+<fmt:setBundle basename="language"/>
+<%@ page contentType="text/html;charset=UTF-8" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -53,36 +56,36 @@
         <div class="col-md-3"></div>
         <div class="col-md-6">
             <form class="form-signin" method="post" action="registration">
-                <h2 class="form-signin-heading">Join us now!</h2>
+                <h2 class="form-signin-heading"><fmt:message key="label.registration"/></h2>
 
-                <input type="email" class="form-control setMargin" placeholder="Email address" name="email" required
+                <input type="email" class="form-control setMargin" placeholder="<fmt:message key="label.email"/>" name="email" required
                        autofocus>
 
 
-                <input name="firstName" id="FirstName" class="form-control setMargin" placeholder="FirstName"
+                <input name="firstName" id="FirstName" class="form-control setMargin" placeholder="<fmt:message key="label.firstName"/>"
                        required autofocus>
 
 
 
-                <input name="lastName" id="LastName" class="form-control setMargin" placeholder="LastName" required
+                <input name="lastName" id="LastName" class="form-control setMargin" placeholder="<fmt:message key="label.lastName"/>" required
                        autofocus>
 
 
 
 
                 <input name="password" type="password" id="inputPassword" class="form-control setMargin"
-                       placeholder="Password" required>
+                       placeholder="<fmt:message key="label.password"/>" required>
 
 
                 <div class="setMargin">
                     <button name="button" value="Register" class="btn btn-outline-success my-2 my-sm-0"
-                            type="submit">Register</button>
+                            type="submit"><fmt:message key="button.register"/></button>
                 </div>
 
 
             </form>
             <div class="setMargin">
-                <a href="login" class="btn btn-info" role="button" name="button" value="Register">Login</a>
+                <a href="login" class="btn btn-info" role="button" name="button" value="Register"><fmt:message key="button.login"/></a>
             </div>
         </div>
         <div class="col-md-3"></div>

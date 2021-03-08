@@ -34,8 +34,13 @@
                     </div>
                 </div>
                 <div class="find-box">
-                    <h1>Products in my cart.</h1>
-                    <h4>Sum of products $<c:out value="${sumOfPrice}"/></h4>
+                    <h1><fmt:message key="label.cart.productInMyCart"/></h1>
+                    <h4><fmt:message key="label.cart.sumOfProducts"/> $<c:out value="${sumOfPrice}"/></h4>
+                    <c:if test="${sumOfPrice != 0}">
+                        <form action="order" method="post" style="text-align: center">
+                            <button  class="btn btn-success lg"><fmt:message key="button.orderProducts"/></button>
+                        </form>
+                    </c:if>
 
                 </div>
             </div>
@@ -50,15 +55,13 @@
 
                             <form action="deleteProductFromCart" method="post">
                                 <input type="hidden" name="productId" value="<c:out value="${product.getId()}"/>" />
-                                <button  class="btn btn-danger">Delete product from cart</button>
+                                <button  class="btn btn-danger"><fmt:message key="button.deleteProductFromCart"/></button>
                             </form>
                         </div>
                     </a>
                 </div>
                 </c:forEach>
-                <form action="order.jsp" method="post">
-                    <button  class="btn btn-success">Order this products</button>
-                </form>
+
             </div>
 
         </div>

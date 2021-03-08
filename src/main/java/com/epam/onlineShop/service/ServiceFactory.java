@@ -30,6 +30,9 @@ public class ServiceFactory {
         SERVICE_MAP.put("/orderDetail", new OrderDetailAdminService());
         SERVICE_MAP.put("/changeStatus", new ChangeStatusService());
         SERVICE_MAP.put("/DeleteOrderAdminService", new DeleteOrderAdminService());
+        SERVICE_MAP.put("/changeLanguage", new ChangeLanguageService());
+        SERVICE_MAP.put("/order", new OrderService());
+
 
 
     }

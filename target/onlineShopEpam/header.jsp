@@ -1,8 +1,9 @@
-
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-<%@ page language="java" contentType="text/html; charset=utf-8"
-         pageEncoding="utf-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<fmt:setLocale value="${sessionScope.language}"/>
+<fmt:setBundle basename="language"/>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@page import="java.util.List"%>
 
 <!DOCTYPE html>
@@ -58,11 +59,11 @@
                         <div class="login-sr">
                             <div class="login-signup">
                                 <ul>
-                                    <li><a href="login">Login</a></li>
+                                    <li><a href="login"><fmt:message key="button.login"/></a></li>
 
                                     <li>
 
-                                        <a  href="logout">Log out</a></li>
+                                        <a  href="logout"><fmt:message key="button.logout"/></a></li>
                                 </ul>
                             </div>
                         </div>

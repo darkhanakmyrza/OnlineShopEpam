@@ -1,32 +1,10 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%--<html>--%>
-<%--<head>--%>
-<%--    <title>Login</title>--%>
-<%--</head>--%>
-<%--<body>--%>
-<%--<form action="login" method="post">--%>
-<%--    <div class="container">--%>
-<%--        <h1>Login</h1>--%>
-
-
-<%--        <label for="email"><b>Email</b></label>--%>
-<%--        <input type="text" placeholder="Enter Email" name="login" id="email" required>--%>
-
-<%--        <label for="psw"><b>Password</b></label>--%>
-<%--        <input type="password" placeholder="Enter Password" name="password" id="psw" required>--%>
-
-
-<%--        <button type="submit" class="loginbtn">Login</button>--%>
-<%--    </div>--%>
-
-<%--    <div class="container registration">--%>
-<%--        <p>Register account? <a href="registration">Sign in</a>.</p>--%>
-<%--    </div>--%>
-<%--</form>--%>
-<%--</body>--%>
-<%--</html>--%>
+<fmt:setLocale value="${sessionScope.language}"/>
+<fmt:setBundle basename="language"/>
+<%@ page contentType="text/html;charset=UTF-8" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -51,34 +29,32 @@
 <body>
 
 <div class="container">
+
+
     <h3 style="color:red"><c:out value="${error}" /> </h3>
     <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6">
             <form class="form-signin"  method="post" action="login">
-                <h2 class="form-signin-heading setMargin">Please sign in</h2>
+                <h2 class="form-signin-heading setMargin"><fmt:message key="label.signin"/></h2>
                 <!-- <label for="inputEmail" class="sr-only">Email address</label> -->
 
-                <input type="email" class="form-control setMargin" placeholder="Email address" name="email" required autofocus>
+                <input type="email" class="form-control setMargin" placeholder="<fmt:message key="label.email"/>" name="email" required autofocus>
 
 
                 <!-- <label for="inputPassword" class="sr-only">Password</label> -->
-                <input type="password" class="form-control setMargin" placeholder="Password" name="password" required>
-                <div class="checkbox setMargin">
-                    <label>
-                        <input type="checkbox" value="remember-me"> Remember me
-                    </label>
-                </div>
+                <input type="password" class="form-control setMargin" placeholder="<fmt:message key="label.password"/>" name="password" required>
+
 
                 <div class="setMargin">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="button" value="Login">Login
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="button" value="Login"><fmt:message key="button.login"/>
                     </button>
                 </div>
 
 
             </form>
             <div class="setMargin">
-                <a href="registration.jsp" class="btn btn-info" role="button" name="button" value="Register">Register</a>
+                <a href="registration.jsp" class="btn btn-info" role="button" name="button" value="Register"><fmt:message key="button.register"/></a>
             </div>
         </div>
         <div class="col-md-3"></div>

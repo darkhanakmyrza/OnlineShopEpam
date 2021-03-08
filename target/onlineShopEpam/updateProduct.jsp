@@ -155,23 +155,23 @@
 <div class="container">
 
     <form id="contact" action="updateProduct" method="post">
-        <h3>Update product</h3>
+        <h3><fmt:message key="button.updateProduct"/></h3>
 
         <fieldset>
-            <input placeholder="Name of the product" name="name" type="text" value="<c:out value="${product.getName()}"/>" tabindex="1" required autofocus>
+            <input placeholder="<fmt:message key="label.product"/>" name="name" type="text" value="<c:out value="${product.getName()}"/>" tabindex="1" required autofocus>
         </fieldset>
         <fieldset>
-            <input placeholder="Image URL" type="text" value="<c:out value="${product.getImage_url()}"/>" tabindex="2" name="image_url" required>
+            <input placeholder="<fmt:message key="label.imageProduct"/>" type="text" value="<c:out value="${product.getImage_url()}"/>" tabindex="2" name="image_url" required>
         </fieldset>
         <fieldset>
-            <input placeholder="Price" type="number" tabindex="3" value="<c:out value="${product.getPrice()}"/>" name="price" required>
+            <input placeholder="<fmt:message key="label.price"/>" type="number" tabindex="3" value="<c:out value="${product.getPrice()}"/>" name="price" required>
         </fieldset>
 
         <fieldset>
-            <input placeholder="Description of the product" tabindex="5" type="text" value="<c:out value="${product.getDescription()}"/>"	 name="description" required></input>
+            <input placeholder="<fmt:message key="label.descriptionProduct"/>" tabindex="5" type="text" value="<c:out value="${product.getDescription()}"/>"	 name="description" required></input>
         </fieldset>
         <fieldset>
-            <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit</button>
+            <button name="submit" type="submit" id="contact-submit" data-submit="...Sending"><fmt:message key="button.submit"/></button>
         </fieldset>
         <input type="hidden" name="productId" value="<c:out value="${product.getId()}"/>" />
 

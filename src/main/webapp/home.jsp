@@ -1,42 +1,9 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Admin
-  Date: 18.01.2021
-  Time: 11:30
-  To change this template use File | Settings | File Templates.
---%>
-<%--<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>--%>
-<%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>--%>
-<%--<html>--%>
-<%--<head>--%>
-<%--    <title>Home page</title>--%>
-<%--</head>--%>
-<%--<body>--%>
-<%--    <c:if test="${sessionScope.user.isAdmin() == true}">--%>
-<%--        <a href="createProduct">create a product </a>--%>
-<%--    </c:if>--%>
-<%--    <a href="cart">Go to my cart  </a>--%>
-<%--    <p>Hello <c:out value="${sessionScope.user.getFirstName()}" /> </p>--%>
-<%--    <div>--%>
-<%--    <c:forEach var = "product" items="${products}">--%>
-<%--    <div class="row clearfix">--%>
-<%--        <div class="col-lg-3 col-sm-6 col-md-3">--%>
-<%--            <a href="product?id=${product.getId() }">--%>
-<%--                <div class="box-img">--%>
-<%--                    <h4>${product.getName()}</h4>--%>
-<%--                    <img src="${product.getImage_url()}" alt="" />--%>
-<%--                </div>--%>
-<%--            </a>--%>
-<%--        </div>--%>
-<%--        </c:forEach>--%>
-<%--    </div>--%>
-<%--</body>--%>
-<%--</html>--%>
+
 
 <%@ include file="header.jsp" %>
 
 
-<%--<p>Hello <c:out value="${sessionScope.user.getFirstName()}" /> </p>--%>
+
 <div class="modal fade lug" id="myModal" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content-->
@@ -52,8 +19,8 @@
 <div id="sidebar" class="top-nav">
     <ul id="sidebar-nav" class="sidebar-nav">
         <li><a href="#">Help</a></li>
-        <li><a href="howitworks.html">How it works</a></li>
-        <li><a href="#">chamb for Business</a></li>
+        <li><a href="howitworks.html"><fmt:message key="label.home"/></a></li>
+        <li><a href="#"><fmt:message key="label.home2"/></a></li>
     </ul>
 </div>
 <div class="page-content-product">
@@ -67,31 +34,39 @@
                             <div class="form-sh"></div>
                         </div>
                         <c:if test="${sessionScope.user.isAdmin() == true}">
-                            <div class="col-sm-3">
-                                <div class="form-sh"> <a class="btn" href="createProduct">Create product</a> </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-sh"> <a class="btn" href="allUsers">Manage users</a> </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-sh"> <a class="btn" href="ordersAdmin">Orders</a> </div>
-                            </div>
+
+                                <div class="form-sh"> <a role="button" class="btn btn-lg" href="createProduct"><fmt:message key="button.createProduct"/></a> </div>
+                                <div class="form-sh"> <a class="btn btn-lg" href="allUsers"><fmt:message key="button.manageUsers"/></a> </div>
+                                <div class="form-sh"> <a class="btn btn-lg" href="ordersAdmin"><fmt:message key="button.orders"/></a> </div>
+
+
                         </c:if>
                         <c:if test="${sessionScope.user.isAdmin() == false}">
                             <div class="col-sm-3">
-                                <div class="form-sh"> <a class="btn" href="cart">My cart</a> </div>
+                                <div class="form-sh"> <a class="btn" href="cart"><fmt:message key="button.myCart"/></a> </div>
                             </div>
                             <div class="col-sm-3">
-                                <div class="form-sh"> <a class="btn" href="ordersUser">My Orders</a> </div>
+                                <div class="form-sh"> <a class="btn" href="ordersUser"><fmt:message key="button.myOrders"/></a> </div>
                             </div>
                         </c:if>
+                        <form action="changeLanguage" method="get">
+                            <c:if test="${sessionScope.language == ru}">
+                                <input type="hidden" name="language" value="en">
+                            </c:if>
+                            <c:if test="${sessionScope.language == en}">
+                                <input type="hidden" name="language" value="ru">
+                            </c:if>
+                            <div class="form-sh">
+                                <input type="submit" class="btn btn-primary btn-sm" value="Change language">
+                            </div>
+                        </form>
 
 
                     </div>
                 </div>
                 <div class="find-box">
-                    <h1>Find your next product.</h1>
-                    <h4>It has never been easier.</h4>
+                    <h1><fmt:message key="label.home"/></h1>
+                    <h4><fmt:message key="label.home2"/></h4>
 
                 </div>
             </div>

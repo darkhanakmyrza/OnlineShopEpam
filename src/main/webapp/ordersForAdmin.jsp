@@ -1,41 +1,50 @@
+
 <%@ include file="header.jsp" %>
 
-<!-- Required meta tags -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<div class="cart-box-main">
+    <div class="container">
+        <div class="row">
+            <h1 style="text-align: center"><fmt:message key="label.orders.allOrders"/></h1>
+            <div class="col-lg-12">
+                <div class="table-main table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th><fmt:message key="label.emailUser"/></th>
+                            <th><fmt:message key="label.orders.orderedTime"/></th>
+                            <th><fmt:message key="label.orders.orderStatus"/></th>
 
 
 
-<div class="container">
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach var = "order" items="${orders}">
+                            <tr>
 
-    <h1 style="text-align: center">All orders</h1>
-
-    <div>
-        <div class="one">
-            <div class="two">User email</div>
-            <div class="two">Ordered time</div>
-            <div class="two">Current order status</div>
-        </div>
-        <c:forEach var = "order" items="${orders}">
-
-            <div class="one">
-                <a href="orderDetail?orderId=${order.get(0)}">
-                    <div class="two">${order.get(2)}</div>
-                    <div class="two">${order.get(1)}</div>
-                    <div class="two">${order.get(3)}</div>
-                </a>
+                                <td class="thumbnail-img">
+                                    <a href="orderDetail?orderId=${order.get(0)}">
+                                            ${order.get(2)}
+                                    </a>
+                                </td>
+                                <td class="name-pr">
+                                    <a href="orderDetail?orderId=${order.get(0)}">
+                                            ${order.get(1)}
+                                    </a>
+                                </td>
+                                <td class="name-pr">
+                                    <a href="orderDetail?orderId=${order.get(0)}">
+                                            ${order.get(3)}
+                                    </a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-
-
-        </c:forEach>
-
+        </div>
     </div>
 </div>
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<%--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>--%>
-<%--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>--%>
-<%--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>--%>
-<%--</body>--%>
-<%--</html>--%>
 <%@ include file="footer.jsp" %>
