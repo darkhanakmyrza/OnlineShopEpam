@@ -21,6 +21,6 @@ public class ActivateUserService implements Service{
         long userId = Long.valueOf(request.getParameter(USER_ID));
         userDao.ActivateUser(userId, true);
 
-        response.sendRedirect("allUsers");
+        response.sendRedirect(ALL_USER);
     }
 }

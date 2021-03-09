@@ -15,6 +15,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.epam.onlineShop.util.constants.ConstantNames.*;
+
 public class StatusDaoImpl extends ConnectionPool implements StatusDao {
 
     private final Logger LOGGER = LogManager.getLogger(this.getClass().getName());
@@ -60,8 +62,8 @@ public class StatusDaoImpl extends ConnectionPool implements StatusDao {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 Status status = new Status();
-                status.setId(rs.getLong("id"));
-                status.setStatusName(rs.getString("status_name"));
+                status.setId(rs.getLong(ID));
+                status.setStatusName(rs.getString(STATUS_NAME));
                 statuses.add(status);
             }
             pstmt.close();
@@ -88,8 +90,8 @@ public class StatusDaoImpl extends ConnectionPool implements StatusDao {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
 
-                status.setId(rs.getLong("id"));
-                status.setStatusName(rs.getString("status_name"));
+                status.setId(rs.getLong(ID));
+                status.setStatusName(rs.getString(STATUS_NAME));
 
             }
             pstmt.close();

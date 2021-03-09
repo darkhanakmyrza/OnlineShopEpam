@@ -15,6 +15,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.epam.onlineShop.util.constants.ConstantNames.*;
+
 
 public class UserDaoImpl extends ConnectionPool implements UserDao{
     private final Logger LOGGER = LogManager.getLogger(this.getClass().getName());
@@ -73,13 +75,13 @@ public class UserDaoImpl extends ConnectionPool implements UserDao{
 
             while (resultSet.next()) {
                 user = new User();
-                user.setId(resultSet.getLong("id"));
-                user.setFirstName(resultSet.getString("first_name"));
-                user.setLastName(resultSet.getString("last_name"));
-                user.setEmail(resultSet.getString("email"));
-                user.setPassword(resultSet.getString("password"));
-                user.setAdmin(resultSet.getBoolean("admin"));
-                user.setActive(resultSet.getBoolean("active"));
+                user.setId(resultSet.getLong(ID));
+                user.setFirstName(resultSet.getString(FIRST_NAME_TABLE));
+                user.setLastName(resultSet.getString(LAST_NAME_TABLE));
+                user.setEmail(resultSet.getString(EMAIL));
+                user.setPassword(resultSet.getString(PASSWORD));
+                user.setAdmin(resultSet.getBoolean(ADMIN));
+                user.setActive(resultSet.getBoolean(ACTIVE));
             }
 
             resultSet.close();
@@ -137,13 +139,13 @@ public class UserDaoImpl extends ConnectionPool implements UserDao{
 
             while (resultSet.next()) {
                 User user = new User();
-                user.setId(resultSet.getLong("id"));
-                user.setFirstName(resultSet.getString("first_name"));
-                user.setLastName(resultSet.getString("last_name"));
-                user.setEmail(resultSet.getString("email"));
-                user.setPassword(resultSet.getString("password"));
-                user.setAdmin(resultSet.getBoolean("admin"));
-                user.setActive(resultSet.getBoolean("active"));
+                user.setId(resultSet.getLong(ID));
+                user.setFirstName(resultSet.getString(FIRST_NAME_TABLE));
+                user.setLastName(resultSet.getString(LAST_NAME_TABLE));
+                user.setEmail(resultSet.getString(EMAIL));
+                user.setPassword(resultSet.getString(PASSWORD));
+                user.setAdmin(resultSet.getBoolean(ADMIN));
+                user.setActive(resultSet.getBoolean(ACTIVE));
                 users.add(user);
             }
 

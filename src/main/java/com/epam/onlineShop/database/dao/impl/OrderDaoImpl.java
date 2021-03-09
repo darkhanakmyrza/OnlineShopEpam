@@ -15,6 +15,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.epam.onlineShop.util.constants.ConstantNames.*;
+
 public class OrderDaoImpl extends ConnectionPool implements OrderDao {
 
     private final Logger LOGGER = LogManager.getLogger(this.getClass().getName());
@@ -101,10 +103,10 @@ public class OrderDaoImpl extends ConnectionPool implements OrderDao {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 Order order = new Order();
-                order.setId(rs.getLong("id"));
-                order.setDateTime(rs.getTimestamp("date_time"));
-                order.setStatusId(rs.getLong("status"));
-                order.setDeliveryAddressId(rs.getLong("delivery_address"));
+                order.setId(rs.getLong(ID));
+                order.setDateTime(rs.getTimestamp(DATE_TIME));
+                order.setStatusId(rs.getLong(STATUS));
+                order.setDeliveryAddressId(rs.getLong(DELIVERY_ADDRESS));
                 orders.add(order);
             }
             pstmt.close();
@@ -131,10 +133,10 @@ public class OrderDaoImpl extends ConnectionPool implements OrderDao {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 ArrayList<String> order =new ArrayList<>();
-                order.add(String.valueOf(rs.getLong("order_id")));
-                order.add(String.valueOf(rs.getTimestamp("date_time")));
-                order.add(rs.getString("user_email"));
-                order.add(rs.getString("status_name"));
+                order.add(String.valueOf(rs.getLong(ORDER_ID_TABLE)));
+                order.add(String.valueOf(rs.getTimestamp(DATE_TIME)));
+                order.add(rs.getString(USER_EMAIL));
+                order.add(rs.getString(STATUS_NAME));
                 orders.add(order);
             }
             pstmt.close();
@@ -189,9 +191,9 @@ public class OrderDaoImpl extends ConnectionPool implements OrderDao {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 ArrayList<String> order =new ArrayList<>();
-                order.add(String.valueOf(rs.getLong("order_id")));
-                order.add(String.valueOf(rs.getTimestamp("date_time")));
-                order.add(rs.getString("status_name"));
+                order.add(String.valueOf(rs.getLong(ORDER_ID_TABLE)));
+                order.add(String.valueOf(rs.getTimestamp(DATE_TIME)));
+                order.add(rs.getString(STATUS_NAME));
                 orders.add(order);
             }
             pstmt.close();
@@ -244,10 +246,10 @@ public class OrderDaoImpl extends ConnectionPool implements OrderDao {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
 
-                order.setId(rs.getLong("id"));
-                order.setDateTime(rs.getTimestamp("date_time"));
-                order.setDeliveryAddressId(rs.getLong("delivery_address"));
-                order.setStatusId(rs.getLong("status"));
+                order.setId(rs.getLong(ID));
+                order.setDateTime(rs.getTimestamp(DATE_TIME));
+                order.setDeliveryAddressId(rs.getLong(DELIVERY_ADDRESS));
+                order.setStatusId(rs.getLong(STATUS));
 
             }
             pstmt.close();

@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
+import static com.epam.onlineShop.util.constants.ConstantNames.*;
+import static com.epam.onlineShop.util.constants.ConstantPageNames.*;
+
 
 public class ChangeLanguageService implements Service {
     @Override
@@ -14,9 +17,9 @@ public class ChangeLanguageService implements Service {
 
         HttpSession session = request.getSession();
 
-        String language = request.getParameter("language");
-        session.setAttribute("language", language);
+        String language = request.getParameter(LANGUAGE);
+        session.setAttribute(LANGUAGE, language);
 
-        response.sendRedirect("home");
+        response.sendRedirect(HOME_SERVICE);
     }
 }

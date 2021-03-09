@@ -19,8 +19,8 @@ import java.util.List;
 
 import java.util.Date;
 
-import static com.epam.onlineShop.util.constants.ConstantNames.USER;
-import static com.epam.onlineShop.util.constants.ConstantPageNames.HOME_SERVICE;
+import static com.epam.onlineShop.util.constants.ConstantNames.*;
+import static com.epam.onlineShop.util.constants.ConstantPageNames.*;
 
 public class CreateOrderFromCartProductsService implements Service{
     CartDao cartDao = new CartDaoImpl();
@@ -40,17 +40,17 @@ public class CreateOrderFromCartProductsService implements Service{
         List<Long> productIdsInCart = cartDao.getProductsInCart(userId);
 
         Address address = new Address();
-        address.setCountry(request.getParameter("country"));
-        address.setCity(request.getParameter("city"));
-        address.setStreet(request.getParameter("street"));
-        address.setPhone(request.getParameter("phone"));
+        address.setCountry(request.getParameter(COUNTRY));
+        address.setCity(request.getParameter(CITY));
+        address.setStreet(request.getParameter(STREET));
+        address.setPhone(request.getParameter(PHONE));
         address.setId(addressDao.takeLastID() + 1);
         addressDao.createAddress(address);
         System.out.println(address.getId());
 
         Status status = new Status();
-        status.setId(statusDao.getIdByStatusName("pending"));
-        status.setStatusName("pending");
+        status.setId(statusDao.getIdByStatusName(STATUS_PENDING));
+        status.setStatusName(STATUS_PENDING);
         System.out.println(status.getId());
 
         Order order = new Order();
@@ -72,7 +72,7 @@ public class CreateOrderFromCartProductsService implements Service{
             orderItemDao.createOrderItem(orderItem);
 
         }
-        //to-do delete from cart,
+
         cartDao.deleteProductFromCartByUserId(userId);
 
         response.sendRedirect(HOME_SERVICE);

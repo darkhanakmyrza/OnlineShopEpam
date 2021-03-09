@@ -16,9 +16,8 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.List;
 
-import static com.epam.onlineShop.util.constants.ConstantNames.USER;
-import static com.epam.onlineShop.util.constants.ConstantNames.USERS;
-import static com.epam.onlineShop.util.constants.ConstantPageNames.ALL_USERS_JSP;
+import static com.epam.onlineShop.util.constants.ConstantNames.*;
+import static com.epam.onlineShop.util.constants.ConstantPageNames.*;
 
 public class OrderService implements Service{
     CartDao cartDao = new CartDaoImpl();
@@ -35,9 +34,9 @@ public class OrderService implements Service{
             totalPrice+= productDao.getProductById(productId).getPrice();
         }
 
-        request.setAttribute("totalPrice", totalPrice);
+        request.setAttribute(TOTAL_PRICE, totalPrice);
 
-        dispatcher = request.getRequestDispatcher("order.jsp");
+        dispatcher = request.getRequestDispatcher(ORDER_JSP);
         dispatcher.forward(request, response);
     }
 }

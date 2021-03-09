@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static com.epam.onlineShop.util.constants.ConstantNames.*;
+
 public class CartDaoImpl extends ConnectionPool implements CartDao {
     private final Logger LOGGER = LogManager.getLogger(this.getClass().getName());
 
@@ -65,7 +67,7 @@ public class CartDaoImpl extends ConnectionPool implements CartDao {
 
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                long productId = resultSet.getLong("product_id");
+                long productId = resultSet.getLong(PRODUCT_ID_TABLE);
                 productsIds.add(productId);
             }
 
@@ -116,7 +118,7 @@ public class CartDaoImpl extends ConnectionPool implements CartDao {
             preparedStatement.setLong(2, cart.getUserId());
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                newCart.setId(rs.getLong("id"));
+                newCart.setId(rs.getLong(ID));
             }
             preparedStatement.close();
             releaseConnection(con);
@@ -142,9 +144,9 @@ public class CartDaoImpl extends ConnectionPool implements CartDao {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 Cart cart = new Cart();
-                cart.setId(rs.getLong("id"));
-                cart.setProductId(rs.getLong("product_id"));
-                cart.setUserId(rs.getLong("user_id"));
+                cart.setId(rs.getLong(ID));
+                cart.setProductId(rs.getLong(PRODUCT_ID_TABLE));
+                cart.setUserId(rs.getLong(USER_ID_TABLE));
 
                 carts.add(cart);
             }

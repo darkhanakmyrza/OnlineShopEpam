@@ -16,6 +16,10 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 
+import static com.epam.onlineShop.util.constants.ConstantNames.*;
+import static com.epam.onlineShop.util.constants.ConstantPageNames.*;
+
+
 public class DeleteOrderAdminService implements Service {
     OrderDao orderDao = new OrderDaoImpl();
     OrderItemDao orderItemDao = new OrderItemDaoImpl();
@@ -24,13 +28,13 @@ public class DeleteOrderAdminService implements Service {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ParseException, SQLException {
 
-        long orderId = Long.valueOf(request.getParameter("orderId"));
+        long orderId = Long.valueOf(request.getParameter(ORDER_ID));
         long addressId = orderDao.getOrderById(orderId).getDeliveryAddressId();
 
         orderItemDao.deleteOrderItemsByOrderId(orderId);
 
         orderDao.deleteOrderById(orderId);
         addressDao.deleteAddressById(addressId);
-        response.sendRedirect("ordersAdmin");
+        response.sendRedirect(ORDERS_ADMIN_SERVICE);
     }
 }

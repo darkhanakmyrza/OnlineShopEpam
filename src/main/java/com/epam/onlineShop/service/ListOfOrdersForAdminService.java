@@ -18,10 +18,8 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.epam.onlineShop.util.constants.ConstantNames.USER;
-import static com.epam.onlineShop.util.constants.ConstantNames.USERS;
-import static com.epam.onlineShop.util.constants.ConstantPageNames.ALL_USERS_JSP;
-import static com.epam.onlineShop.util.constants.ConstantPageNames.LOGIN_SERVICE;
+import static com.epam.onlineShop.util.constants.ConstantNames.*;
+import static com.epam.onlineShop.util.constants.ConstantPageNames.*;
 
 public class ListOfOrdersForAdminService implements Service{
 
@@ -37,10 +35,10 @@ public class ListOfOrdersForAdminService implements Service{
         User currentUser = (User)session.getAttribute(USER);
         if(currentUser.isAdmin()){
             ArrayList<ArrayList<String>> orders = orderDao.getFrom4Tables();
-            request.setAttribute("orders", orders);
+            request.setAttribute(ORDERS, orders);
 
 
-            dispatcher = request.getRequestDispatcher("ordersForAdmin.jsp");
+            dispatcher = request.getRequestDispatcher(ORDERS_ADMIN_JSP);
             dispatcher.forward(request, response);
 
         }else {

@@ -15,6 +15,12 @@ public class ConstantPageNames {
     public static final String REGISTRATION_SERVICE = "registration";
     public static final String CART_SERVICE = "cart";
     public static final String ALL_USERS_SERVICE = "allUsers";
+    public static final String ORDERS_ADMIN_SERVICE = "ordersAdmin";
+    public static final String ORDERS_ADMIN_JSP = "ordersForAdmin.jsp";
+    public static final String ORDERS_USERS_JSP = "ordersForUsers.jsp";
+    public static final String ORDER_DETAIL_JSP = "OrderDetail.jsp";
+    public static final String ORDER_JSP = "order.jsp";
+//    public static final String ALL_USERS_SERVICE = "allUsers";
 
 
 

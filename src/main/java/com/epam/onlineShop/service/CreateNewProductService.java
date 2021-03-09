@@ -16,6 +16,8 @@ import java.text.ParseException;
 import static com.epam.onlineShop.util.constants.ConstantNames.*;
 import static com.epam.onlineShop.util.constants.ConstantPageNames.*;
 
+
+
 public class CreateNewProductService implements Service{
     ProductDao productDao = new ProductDaoImpl();
 

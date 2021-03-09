@@ -12,6 +12,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.epam.onlineShop.util.constants.ConstantNames.PRODUCT_ID_TABLE;
+
 public class OrderItemDaoImpl extends ConnectionPool implements OrderItemDao {
 
     private final Logger LOGGER = LogManager.getLogger(this.getClass().getName());
@@ -57,7 +59,7 @@ public class OrderItemDaoImpl extends ConnectionPool implements OrderItemDao {
             pstmt.setLong(1,orderId);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                productsId.add(rs.getLong("product_id"));
+                productsId.add(rs.getLong(PRODUCT_ID_TABLE));
             }
             pstmt.close();
             releaseConnection(con);

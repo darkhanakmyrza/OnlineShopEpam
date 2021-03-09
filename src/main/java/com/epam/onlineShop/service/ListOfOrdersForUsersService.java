@@ -16,8 +16,9 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
 
-import static com.epam.onlineShop.util.constants.ConstantNames.USER;
-import static com.epam.onlineShop.util.constants.ConstantPageNames.LOGIN_SERVICE;
+import static com.epam.onlineShop.util.constants.ConstantNames.*;
+import static com.epam.onlineShop.util.constants.ConstantPageNames.*;
+
 
 public class ListOfOrdersForUsersService implements Service{
 
@@ -34,10 +35,10 @@ public class ListOfOrdersForUsersService implements Service{
         if(!currentUser.isAdmin()){
 
             ArrayList<ArrayList<String>> orders = orderDao.getOrderByUserId(currentUser.getId());
-            request.setAttribute("orders", orders);
+            request.setAttribute(ORDERS, orders);
 
 
-            dispatcher = request.getRequestDispatcher("ordersForUsers.jsp");
+            dispatcher = request.getRequestDispatcher(ORDERS_USERS_JSP);
             dispatcher.forward(request, response);
 
         }else {

@@ -14,6 +14,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.epam.onlineShop.util.constants.ConstantNames.*;
+
 public class ProductDaoImpl extends ConnectionPool implements ProductDao {
 
     private final Logger LOGGER = LogManager.getLogger(this.getClass().getName());
@@ -36,12 +38,12 @@ public class ProductDaoImpl extends ConnectionPool implements ProductDao {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 product = new Product();
-                product.setId(rs.getLong("id"));
-                product.setName(rs.getString("name"));
-                product.setDescription(rs.getString("description"));
-                product.setPrice(rs.getLong("price"));
-                product.setImage_url(rs.getString("image_url"));
-                product.setUserId(rs.getLong("user_id"));
+                product.setId(rs.getLong(ID));
+                product.setName(rs.getString(NAME));
+                product.setDescription(rs.getString(DESCRIPTION));
+                product.setPrice(rs.getLong(PRICE));
+                product.setImage_url(rs.getString(IMAGE_URL));
+                product.setUserId(rs.getLong(ID_USER));
             }
             pstmt.close();
             releaseConnection(con);
@@ -66,12 +68,12 @@ public class ProductDaoImpl extends ConnectionPool implements ProductDao {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 Product product = new Product();
-                product.setId(rs.getLong("id"));
-                product.setName(rs.getString("name"));
-                product.setDescription(rs.getString("description"));
-                product.setPrice(rs.getLong("price"));
-                product.setImage_url(rs.getString("image_url"));
-                product.setUserId(rs.getLong("user_id"));
+                product.setId(rs.getLong(ID));
+                product.setName(rs.getString(NAME));
+                product.setDescription(rs.getString(DESCRIPTION));
+                product.setPrice(rs.getLong(PRICE));
+                product.setImage_url(rs.getString(IMAGE_URL));
+                product.setUserId(rs.getLong(ID_USER));
 
 
                 products.add(product);
@@ -158,12 +160,12 @@ public class ProductDaoImpl extends ConnectionPool implements ProductDao {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 Product product = new Product();
-                product.setId(rs.getLong("id"));
-                product.setName(rs.getString("name"));
-                product.setDescription(rs.getString("description"));
-                product.setPrice(rs.getLong("price"));
-                product.setImage_url(rs.getString("image_url"));
-                product.setUserId(rs.getLong("user_id"));
+                product.setId(rs.getLong(ID));
+                product.setName(rs.getString(NAME));
+                product.setDescription(rs.getString(DESCRIPTION));
+                product.setPrice(rs.getLong(PRICE));
+                product.setImage_url(rs.getString(IMAGE_URL));
+                product.setUserId(rs.getLong(ID_USER));
                 products.add(product);
             }
             pstmt.close();

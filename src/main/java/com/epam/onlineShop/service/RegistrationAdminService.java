@@ -39,15 +39,15 @@ public class RegistrationAdminService implements Service {
             String email = request.getParameter(EMAIL) ;
             if(userDao.isEmailExist(email)){
 
-                request.setAttribute(ERROR, "Email already exist");
+                request.setAttribute(ERROR, ERROR_EMAIL_EXIST);
                 dispatcher = request.getRequestDispatcher(REGISTRATION_JSP);
                 dispatcher.forward(request, response);
             }else if(!validateMailWithRegex(email)) {
-                request.setAttribute(ERROR, "Not correct format of mail, please type it again");
+                request.setAttribute(ERROR, ERROR_EMAIL_FORMAT);
                 dispatcher = request.getRequestDispatcher(REGISTRATION_JSP);
                 dispatcher.forward(request, response);
             }else if(!validatePasswordWithRegex(request.getParameter(PASSWORD))){
-                request.setAttribute(ERROR, "Not correct format of password, please type it again");
+                request.setAttribute(ERROR, ERROR_PASSWORD_FORMAT);
                 dispatcher = request.getRequestDispatcher(REGISTRATION_JSP);
                 dispatcher.forward(request, response);
             }else{

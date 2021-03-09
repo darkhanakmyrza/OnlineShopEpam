@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.onlineShop.util.constants.ConstantNames.*;
-import static com.epam.onlineShop.util.constants.ConstantPageNames.HOME_SERVICE;
+import static com.epam.onlineShop.util.constants.ConstantPageNames.*;
 
 public class OrderDetailAdminService implements Service{
 
@@ -32,7 +32,7 @@ public class OrderDetailAdminService implements Service{
 
         RequestDispatcher dispatcher;
 
-        long orderId = Long.valueOf(request.getParameter("orderId"));
+        long orderId = Long.valueOf(request.getParameter(ORDER_ID));
         ArrayList<Long> productsIds = orderItemDao.getProductsIdFromOrderItem(orderId);
 
         ArrayList<Product> products = new ArrayList<>();
@@ -43,12 +43,12 @@ public class OrderDetailAdminService implements Service{
         List<Status> statuses = statusDao.getAllStatuses();
         Status currentStatus = statusDao.getStatusByOrderId(orderId);
 
-        request.setAttribute("products", products);
-        request.setAttribute("statuses", statuses);
-        request.setAttribute("currentStatus", currentStatus);
-        request.setAttribute("orderId", orderId);
+        request.setAttribute(PRODUCTS, products);
+        request.setAttribute(STATUSES, statuses);
+        request.setAttribute(CURRENT_STATUS, currentStatus);
+        request.setAttribute(ORDER_ID, orderId);
         System.out.println(products);
-        dispatcher = request.getRequestDispatcher("OrderDetail.jsp");
+        dispatcher = request.getRequestDispatcher(ORDER_DETAIL_JSP);
         dispatcher.forward(request, response);
     }
 }
