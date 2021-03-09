@@ -1,0 +1,2 @@
+2021-03-08 23:00:34.145 [main] ERROR com.epam.onlineShop.service.Test.main(Test.java:21) - This is an ERROR message
+2021-03-08 23:00:34.146 [main] FATAL com.epam.onlineShop.service.Test.main(Test.java:23) - This is a FATAL message
