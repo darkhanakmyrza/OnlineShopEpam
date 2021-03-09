@@ -1,7 +1,8 @@
+
 -- Creating database schema
 CREATE SCHEMA `onlineshopepam` ;
 
---creating user table
+
 CREATE TABLE user (
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	first_name VARCHAR(45) NOT NULL,
@@ -12,8 +13,8 @@ CREATE TABLE user (
 	active BOOLEAN
 );
 
---creating product table
---to do delete user_id
+
+
 CREATE TABLE product(
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(45) NOT NULL,
@@ -24,7 +25,7 @@ CREATE TABLE product(
     FOREIGN KEY (user_id) REFERENCES user(id)
 );
 
---creating table cart
+
 CREATE TABLE cart(
     id INT PRIMARY KEY AUTO_INCREMENT,
     product_id INT,
@@ -39,11 +40,11 @@ CREATE TABLE ordering_status(
     status_name VARCHAR(45) NOT NULL
 );
 
-INSERT INTO `onlineshopepam`.`ordering_status` (`id`, `status_name`) VALUES ('1', 'wont be send');
-INSERT INTO `onlineshopepam`.`ordering_status` (`id`, `status_name`) VALUES ('2', 'canceled');
-INSERT INTO `onlineshopepam`.`ordering_status` (`id`, `status_name`) VALUES ('3', 'arrived');
-INSERT INTO `onlineshopepam`.`ordering_status` (`id`, `status_name`) VALUES ('4', 'shipped');
-INSERT INTO `onlineshopepam`.`ordering_status` (`id`, `status_name`) VALUES ('5', 'pending');
+INSERT INTO `ordering_status` (`id`, `status_name`) VALUES ('1', 'wont be send');
+INSERT INTO `ordering_status` (`id`, `status_name`) VALUES ('2', 'canceled');
+INSERT INTO `ordering_status` (`id`, `status_name`) VALUES ('3', 'arrived');
+INSERT INTO `ordering_status` (`id`, `status_name`) VALUES ('4', 'shipped');
+INSERT INTO `ordering_status` (`id`, `status_name`) VALUES ('5', 'pending');
 
 
 CREATE TABLE address(
@@ -54,12 +55,10 @@ CREATE TABLE address(
     phone VARCHAR(45) NOT NULL
 );
 
-INSERT INTO `onlineshopepam`.`address` (`id`, `country`, `city`, `street`, `phone`) VALUES (1, 'Kazakhstan', 'Aktobe', 'batys2', '87712944996');
-INSERT INTO `onlineshopepam`.`address` (`id`, `country`, `city`, `street`, `phone`) VALUES (2, 'Russia', 'Moscow', 'stts', '8443232');
 
 
 
-CREATE TABLE order(
+CREATE TABLE orders(
     id INT PRIMARY KEY AUTO_INCREMENT,
     date_time DATETIME NOT NULL,
     status INT,
@@ -73,7 +72,7 @@ CREATE TABLE order_item(
     product_id INT,
     user_id INT,
     order_id INT,
-    FOREIGN KEY (order_id) REFERENCES order(id),
+    FOREIGN KEY (order_id) REFERENCES orders(id),
     FOREIGN KEY (product_id) REFERENCES product(id),
     FOREIGN KEY (user_id) REFERENCES user(id)
 );
@@ -83,7 +82,7 @@ CREATE TABLE order_item(
 -- admin user with password 1
 insert user values(1,'admin','admin', 'ad@gmail.com', 'c4ca4238a0b923820dcc509a6f75849b',1,1);
 
--- just user with password 1
+-- test user with password 1
 insert user values(2,'testUser','testUser', 'test@gmail.com', 'c4ca4238a0b923820dcc509a6f75849b',0,1);
 
 
