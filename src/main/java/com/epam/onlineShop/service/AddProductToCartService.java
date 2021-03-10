@@ -21,7 +21,7 @@ import static com.epam.onlineShop.util.constants.ConstantPageNames.*;
 
 public class AddProductToCartService implements Service {
     CartDao cartDao = new CartDaoImpl();
-    CartFactory cartFactory = new CartFactory();
+    CartFactory cartFactory = CartFactory.getInstance();
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ParseException, SQLException {
 

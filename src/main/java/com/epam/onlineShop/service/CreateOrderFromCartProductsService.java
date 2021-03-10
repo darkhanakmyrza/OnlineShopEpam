@@ -3,6 +3,10 @@ package com.epam.onlineShop.service;
 import com.epam.onlineShop.database.dao.impl.*;
 import com.epam.onlineShop.database.dao.interfaces.*;
 import com.epam.onlineShop.entity.*;
+import com.epam.onlineShop.service.factory.AddressFactory;
+import com.epam.onlineShop.service.factory.OrderFactory;
+import com.epam.onlineShop.service.factory.OrderItemFactory;
+import com.epam.onlineShop.service.factory.StatusFactory;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -29,48 +33,27 @@ public class CreateOrderFromCartProductsService implements Service{
     StatusDao statusDao = new StatusDaoImpl();
     OrderDao orderDao = new OrderDaoImpl();
     OrderItemDao orderItemDao = new OrderItemDaoImpl();
-
+    AddressFactory addressFactory = AddressFactory.getInstance();
+    StatusFactory statusFactory = StatusFactory.getInstance();
+    OrderFactory orderFactory = OrderFactory.getInstance();
+    OrderItemFactory orderItemFactory = OrderItemFactory.getInstance();
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ParseException, SQLException {
 
         RequestDispatcher dispatcher;
         HttpSession session = request.getSession();
         long userId = ((User)session.getAttribute(USER)).getId();
-
         List<Long> productIdsInCart = cartDao.getProductsInCart(userId);
-
-        Address address = new Address();
-        address.setCountry(request.getParameter(COUNTRY));
-        address.setCity(request.getParameter(CITY));
-        address.setStreet(request.getParameter(STREET));
-        address.setPhone(request.getParameter(PHONE));
-        address.setId(addressDao.takeLastID() + 1);
+        Address address = addressFactory.fillAddress(request);
         addressDao.createAddress(address);
-        System.out.println(address.getId());
+        Status status = statusFactory.fillStatus(request);
 
-        Status status = new Status();
-        status.setId(statusDao.getIdByStatusName(STATUS_PENDING));
-        status.setStatusName(STATUS_PENDING);
-        System.out.println(status.getId());
-
-        Order order = new Order();
-        order.setId(orderDao.takeLastID() + 1);
-        LocalDateTime now = LocalDateTime.now();
-        Timestamp dateTime = Timestamp.valueOf(now);
-        order.setDateTime(dateTime);
-        order.setStatusId(status.getId());
-        order.setDeliveryAddressId(address.getId());
+        Order order = orderFactory.fillOrder(request, status, address);
         orderDao.createOrder(order);
-        System.out.println(order.getId());
-
 
         for(Long productId : productIdsInCart){
-            OrderItem orderItem = new OrderItem();
-            orderItem.setProductId(productId);
-            orderItem.setUserId(userId);
-            orderItem.setOrderId(order.getId());
+            OrderItem orderItem = orderItemFactory.fillOrderItem(request, productId,userId, order);
             orderItemDao.createOrderItem(orderItem);
-
         }
 
         cartDao.deleteProductFromCartByUserId(userId);

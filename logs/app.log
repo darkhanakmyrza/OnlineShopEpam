@@ -1,2 +1,4 @@
-2021-03-08 23:00:34.145 [main] ERROR com.epam.onlineShop.service.Test.main(Test.java:21) - This is an ERROR message
-2021-03-08 23:00:34.146 [main] FATAL com.epam.onlineShop.service.Test.main(Test.java:23) - This is a FATAL message
+2021-03-10 22:45:45.010 [main] ERROR com.epam.onlineShop.service.Test.main(Test.java:21) - This is an ERROR message
+2021-03-10 22:45:45.013 [main] FATAL com.epam.onlineShop.service.Test.main(Test.java:23) - This is a FATAL message
+2021-03-10 22:47:25.871 [main] ERROR com.epam.onlineShop.service.Test.main(Test.java:21) - This is an ERROR message
+2021-03-10 22:47:25.873 [main] FATAL com.epam.onlineShop.service.Test.main(Test.java:23) - This is a FATAL message

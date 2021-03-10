@@ -4,6 +4,7 @@ import com.epam.onlineShop.database.dao.impl.ProductDaoImpl;
 import com.epam.onlineShop.database.dao.interfaces.ProductDao;
 import com.epam.onlineShop.entity.Product;
 import com.epam.onlineShop.entity.User;
+import com.epam.onlineShop.service.factory.ProductFactory;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,6 +21,7 @@ import static com.epam.onlineShop.util.constants.ConstantPageNames.*;
 
 public class CreateNewProductService implements Service{
     ProductDao productDao = new ProductDaoImpl();
+    ProductFactory productFactory = ProductFactory.getInstance();
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ParseException, SQLException {
@@ -30,11 +32,7 @@ public class CreateNewProductService implements Service{
         String productName = request.getParameter(NAME);
 
         if(productName!=null) {
-            product.setName(request.getParameter(NAME));
-            product.setDescription(request.getParameter(DESCRIPTION));
-            product.setImage_url(request.getParameter(IMAGE_URL));
-            product.setPrice(Long.valueOf(request.getParameter(PRICE)));
-            product.setUserId(((User)session.getAttribute(USER)).getId());
+            product = productFactory.fillProduct(request);
             productDao.createProduct(product);
             response.sendRedirect(HOME_SERVICE);
         }else{

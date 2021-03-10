@@ -30,6 +30,7 @@ public class RegistrationAdminService implements Service {
     private UserDao userDao = new UserDaoImpl();
     private ServiceFactory serviceFactory = ServiceFactory.getInstance();
 
+
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ParseException, SQLException {
         HttpSession session = request.getSession();
