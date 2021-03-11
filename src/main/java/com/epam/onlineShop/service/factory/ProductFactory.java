@@ -1,6 +1,7 @@
 package com.epam.onlineShop.service.factory;
 
 import com.epam.onlineShop.entity.Product;
+import com.epam.onlineShop.service.builder.ProductBuilderImpl;
 import com.epam.onlineShop.entity.User;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,23 +16,27 @@ public class ProductFactory {
 
     public Product fillProduct(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        Product product = new Product();
-        product.setName(request.getParameter(NAME));
-        product.setDescription(request.getParameter(DESCRIPTION));
-        product.setImage_url(request.getParameter(IMAGE_URL));
-        product.setPrice(Long.valueOf(request.getParameter(PRICE)));
-        product.setUserId(((User)session.getAttribute(USER)).getId());
+        Product product = new ProductBuilderImpl().
+                setName(request.getParameter(NAME)).
+                setDescription(request.getParameter(DESCRIPTION)).
+                setImage_url(request.getParameter(IMAGE_URL)).
+                setPrice(Long.valueOf(request.getParameter(PRICE))).
+                setUserId(((User)session.getAttribute(USER)).getId())
+                .build();
+
         return product;
     }
     public Product updateProduct(HttpServletRequest request){
         HttpSession session = request.getSession();
-        Product product = new Product();
-        product.setName(request.getParameter(NAME));
-        product.setDescription(request.getParameter(DESCRIPTION));
-        product.setImage_url(request.getParameter(IMAGE_URL));
-        product.setPrice(Long.valueOf(request.getParameter(PRICE)));
-        product.setUserId(((User)session.getAttribute(USER)).getId());
-        product.setId(Long.valueOf(request.getParameter(PRODUCT_ID)));
+        Product product = new ProductBuilderImpl().
+                setName(request.getParameter(NAME)).
+                setDescription(request.getParameter(DESCRIPTION)).
+                setImage_url(request.getParameter(IMAGE_URL)).
+                setPrice(Long.valueOf(request.getParameter(PRICE))).
+                setUserId(((User)session.getAttribute(USER)).getId())
+                .setId(Long.valueOf(request.getParameter(PRODUCT_ID)))
+                .build();
+
         return product;
     }
 
